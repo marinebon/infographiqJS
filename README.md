@@ -40,9 +40,9 @@ See [demo](./demo.html).
   link_svg({
     svg: "https://noaa-iea.github.io/fk-esr-info/assets/svg/FKIEA_Ecosystem.svg", 
     csv: "https://docs.google.com/spreadsheets/d/e/2PACX-1vSAROGVpYB58Zkr8P0iwJdTMRPNLZtJ07IyUn-dQ62C2HMuCEScyl8x7urCD7QbRXQYSIJwDn_wku9G/pub?gid=0&single=true&output=csv",
-    svg_id: "svg", 
-    toc_id: "toc",
-    toc_style: "accordion",
+    svg_location: "svg", 
+    csv_location: "toc",
+    text_list: "accordion",
     modal_url_pfx: "http://noaa-iea.github.io/fk-esr-info/modals/"});
 </script>
 ```
