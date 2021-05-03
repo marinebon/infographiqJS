@@ -6,7 +6,7 @@ Infographiq, ie intelligent interactive infographics, core JavaScript library
 
 To see the latest functionality, please try the:
 
-- [demo](./demo.html)
+- [**demo**](./demo.html)
 
 ## Changes
 
