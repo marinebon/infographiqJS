@@ -16,7 +16,7 @@ To see the latest changes, check out the:
 
 ## Usage
 
-This repository _**infographiqJS**_ contains the core JavaScript component of the infographiq, ie intelligent interactive infographics, and ties the following elements together:
+This repository _**infographiqJS**_ contains the core JavaScript component of "_infographiq_", ie intelligent interactive infographics, tying together the **Art** icons with a **Table** to find the **Modal** when clicked:
 
 <!--
 infographiq-elements - Google Drawing
