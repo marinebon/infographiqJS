@@ -55,15 +55,41 @@ Parameters for the `link_svg()` JavaScript function:
 
 - `svg`: art (background + icons) in scalable vector graphics (*.svg) format
 - `csv`: table in comma-seperated values (*.csv) format
-- `svg_location`
-- `csv_location`
+- `svg_id`: identifier of `<div>` tag for replacing with `svg`
+- `toc_id`: identifier of `<div>` tag for replacing with table of contents (toc) using `csv`
 - `debug = false` 
 - `hover_color = 'yellow', width = '100%'`
 - `height = '100%'`
 - `modal_id = 'modal'`
 - `modal_url_pfx` 
-- `text_list = "list"`
+- `toc_style = "list"`: table of contents (toc) style. Options are: 
+  - `"accordion"`: Bootstrap accordion per header
+  - `"list"`: bulleted list
+  - `"sectioned_list"`: bulleted list with headers
+  - `"none"`: skip showing table of contents (toc)
 - `colored_sections = false`
 - `section_colors = ['LightGreen', 'MediumOrchid', 'Orange']`
 - `text_toggle = false`
+
+
+## Contributing
+
+To make changes:
+
+1. Edit `infographiq_latest/infographiq.js|css`
+
+1. Update `README.md` documentation and `demo.html` to reflect latest.
+
+1. Copy `infographiq_latest/` into incremental version number `infographiq_v#/`
+
+1. Note changes in `NEWS.md` with header for incremental version number, eg:
+  
+  > ## infographiq_v1.0.1
+  > 
+  > Changed parameter names and supplemented documentation in README:
+  > - `svg_location` -> `svg_id`
+  > - `csv_location` -> `toc_id`
+  > - `text_style`   -> `toc_style`
+
+1. Git commit and push changes
 

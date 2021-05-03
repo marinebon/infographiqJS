@@ -33,17 +33,17 @@
       </div>
       <div class="col-md-2">
         <p style = "font-weight: bold; text-decoration: underline;">Text list type:</p>
-        <input type="radio" id="text_list_accordion" name="text_list" value="accordion" checked>
-        <label for="text_list_accordion">Accordion</label>
+        <input type="radio" id="toc_style_accordion" name="toc_style" value="accordion" checked>
+        <label for="toc_style_accordion">Accordion</label>
         <br>
-        <input type="radio" id="text_list_list" name="text_list" value="list">
-        <label for="text_list_list">List</label>
+        <input type="radio" id="toc_style_list" name="toc_style" value="list">
+        <label for="toc_style_list">List</label>
         <br>
-        <input type="radio" id="text_list_sectioned_list" name="text_list" value="sectioned_list">
-        <label for="text_list_sectioned_list">Sectioned List</label>
+        <input type="radio" id="toc_style_sectioned_list" name="toc_style" value="sectioned_list">
+        <label for="toc_style_sectioned_list">Sectioned List</label>
         <br>
-        <input type="radio" id="text_list_none" name="text_list" value="none">
-        <label for="text_list_none">None</label>
+        <input type="radio" id="toc_style_none" name="toc_style" value="none">
+        <label for="toc_style_none">None</label>
       </div>
       <div class="col-md-2">
         <p style = "font-weight: bold; text-decoration: underline;">Colored section headers:</p>
@@ -105,7 +105,7 @@
       d3.select('#svg1').html(null);
       d3.select('#text1').html(null);
       var hover_color = d3.select('input[name="hover"]:checked').property("value");
-      var text_list = d3.select('input[name="text_list"]:checked').property("value");
+      var toc_style = d3.select('input[name="toc_style"]:checked').property("value");
       var color_check = d3.select('input[name="colored_section"]:checked').property("value");
       var colored_sections = (color_check != 'none');
       var text_toggle = (d3.select('input[name="text_toggle"]:checked').property("value") == 'true');
@@ -124,10 +124,10 @@
       link_svg({
         svg: 'https://noaa-iea.github.io/fk-esr-info/assets/svg/FKIEA_Ecosystem-text.svg',
         csv: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSAROGVpYB58Zkr8P0iwJdTMRPNLZtJ07IyUn-dQ62C2HMuCEScyl8x7urCD7QbRXQYSIJwDn_wku9G/pub?gid=0&single=true&output=csv',
-        svg_location: 'svg1',
-        csv_location: 'text1',
+        svg_id: 'svg1',
+        toc_id: 'text1',
         modal_url_pfx: 'https://noaa-iea.github.io/fk-esr-info/modals/',
-        text_list: text_list,
+        toc_style: toc_style,
         hover_color: hover_color,
         colored_sections: colored_sections,
         section_colors: color_array,
