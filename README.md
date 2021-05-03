@@ -8,6 +8,8 @@ See [demo](./demo.html).
 
 ## Usage
 
+### HTML
+
 ```html
 <!-- infographiq: layout -->
 <div class="container-fluid">
@@ -46,4 +48,22 @@ See [demo](./demo.html).
     modal_url_pfx: "http://noaa-iea.github.io/fk-esr-info/modals/"});
 </script>
 ```
+
+### link_svg()
+
+Parameters for the `link_svg()` JavaScript function:
+
+- `svg`: art (background + icons) in scalable vector graphics (*.svg) format
+- `csv`: table in comma-seperated values (*.csv) format
+- `svg_location`
+- `csv_location`
+- `debug = false` 
+- `hover_color = 'yellow', width = '100%'`
+- `height = '100%'`
+- `modal_id = 'modal'`
+- `modal_url_pfx` 
+- `text_list = "list"`
+- `colored_sections = false`
+- `section_colors = ['LightGreen', 'MediumOrchid', 'Orange']`
+- `text_toggle = false`
 
