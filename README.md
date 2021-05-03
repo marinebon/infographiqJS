@@ -1,37 +1,39 @@
-## Welcome to GitHub Pages
+## InfographiqJS
 
-You can use the [editor on GitHub](https://github.com/marinebon/infographiqJS/edit/main/README.md) to maintain and preview the content for your website in Markdown files.
+Infographiq, ie intelligent interactive infographics, core JavaScript library
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+## Usage
 
-### Markdown
+```html
+<!-- infographiq: layout -->
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-9">
+      <div id="svg"/>
+    </div>
+    <div class="col-md-3">
+      <div id="toc"/>
+    </div>
+  </div>
+</div>
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+<!-- infographiq: css & js dependencies -->
+<script src="https://marinebon.github.io/infographiqJS/libs/bootstrap_v3/bootstrap.min.js"></script>
+<link  href="https://marinebon.github.io/infographiqJS/libs/bootstrap_v3/bootstrap.min.css" rel="stylesheet" />
+<link  href="https://marinebon.github.io/infographiqJS/libs/font-awesome_v4/css/font-awesome.min.css" rel="stylesheet" />
+<script src="https://marinebon.github.io/infographiqJS/libs/d3_v5/js/d3.v5.min.js"></script>
+<script src="https://marinebon.github.io/infographiqJS/libs/infographiq_v1.0/js/infographiq.js"></script>
+<link  href="https://marinebon.github.io/infographiqJS/libs/infographiq_v1.0/css/infographiq.css" rel="stylesheet" />
 
-```markdown
-Syntax highlighted code block
-
-# Header 1
-## Header 2
-### Header 3
-
-- Bulleted
-- List
-
-1. Numbered
-2. List
-
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
+<!-- infographiq: link_svg() -->
+<script>
+  link_svg({
+    svg: "https://noaa-iea.github.io/fk-esr-info/assets/svg/FKIEA_Ecosystem.svg", 
+    csv: "https://docs.google.com/spreadsheets/d/e/2PACX-1vSAROGVpYB58Zkr8P0iwJdTMRPNLZtJ07IyUn-dQ62C2HMuCEScyl8x7urCD7QbRXQYSIJwDn_wku9G/pub?gid=0&single=true&output=csv",
+    svg_id: "svg", 
+    toc_id: "toc",
+    toc_style: "accordion",
+    modal_url_pfx: "http://noaa-iea.github.io/fk-esr-info/modals/"});
+</script>
 ```
 
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
-
-### Jekyll Themes
-
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/marinebon/infographiqJS/settings/pages). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
-
-### Support or Contact
-
-Having trouble with Pages? Check out our [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://support.github.com/contact) and we’ll help you sort it out.
