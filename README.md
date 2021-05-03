@@ -83,7 +83,7 @@ To make changes:
 1. Copy `infographiq_latest/` into incremental version number `infographiq_v#/`
 
 1. Note changes in `NEWS.md` with header for incremental version number, eg:
-  
+  >
   > ## infographiq_v1.0.1
   > 
   > Changed parameter names and supplemented documentation in README:
@@ -92,4 +92,5 @@ To make changes:
   > - `text_style`   -> `toc_style`
 
 1. Git commit and push changes
+
 
