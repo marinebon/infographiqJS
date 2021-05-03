@@ -4,11 +4,35 @@ Infographiq, ie intelligent interactive infographics, core JavaScript library
 
 ## Demonstration
 
-See [demo](./demo.html).
+To see the latest functionality, please try the:
+
+- [demo](./demo.html)
+
+## Changes
+
+To see the latest changes, check out the:
+
+- [NEWS](./NEWS.html)
 
 ## Usage
 
+This repository _**infographiqJS**_ contains the core JavaScript component of the infographiq, ie intelligent interactive infographics, and ties the following elements together:
+
+<!--
+infographiq-elements - Google Drawing
+- Edit: https://docs.google.com/drawings/d/1i0gjyNsWqqTKJqDJ5SPbqHJLWer0OVcuvhySt2ZGgwk/edit
+-->
+
+<img src="https://docs.google.com/drawings/d/1i0gjyNsWqqTKJqDJ5SPbqHJLWer0OVcuvhySt2ZGgwk/export/svg" alt="infographiq-elements">
+
+
 ### HTML
+
+Here is an example of the raw HTML to paste into a page for rendering, including three basic components:
+
+1. `layout`: the basic layout, possibly using [Bootstrap grid layout options](https://getbootstrap.com/docs/3.3/css/#grid-options)
+2. `css & js dependencies`: Cascading Style Sheets (CSS) and JavaScript (JS) libraries
+3. `link_svg()`: the core infographiqJS function; see below and [demo](./demo.html) for setting values of arguments.
 
 ```html
 <!-- infographiq: layout -->
