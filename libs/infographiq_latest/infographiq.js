@@ -12,6 +12,9 @@ function appendHtml(el, str) {
   }
 }
 
+
+var svg_elements = ["circle", "ellipse", "line", "mesh", "path", "polygon", "polyline", "rect", "text"];
+
 var modal_html = '<div aria-labelledby="modal-title" class="modal fade bs-example-modal-lg" id="modal" role="dialog" tabindex="-1"><div class="modal-dialog modal-lg" role="document"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button><h4 class="modal-title" id="modal-title">title</h4></div><div class="modal-body"><iframe data-src="" height="100%" width="100%" frameborder="0"></iframe></div><div class="modal-footer"><button class="btn btn-default btn-sm" data-dismiss="modal">Close</button></div></div></div></div>';
 
 appendHtml(document.body, modal_html); // "body" has two more children - h1 and span.
@@ -229,11 +232,11 @@ function icon_append(d, h, modal_url_pfx, modal_id, svg_id, hover_color, section
               if (debug){
                   console.log('  mouseover():' + d.icon);
               }
-
-              d3.selectAll("#" + svg_id).select('#' + d.icon)
-                .style("stroke-width", 2)
-                .style("stroke", hover_color);
-
+              for (q = 0; q < 9; q++){
+                d3.selectAll("#" + svg_id).selectAll('#' + d.icon).selectAll(svg_elements[q])
+                  .style("stroke-width", 2)
+                  .style("stroke", hover_color);
+              }
               tooltip_div.transition()
                 .duration(200)
                 .style("opacity", 0.8);
@@ -247,9 +250,11 @@ function icon_append(d, h, modal_url_pfx, modal_id, svg_id, hover_color, section
                   console.log(' handleMouseOverSansTooltip():' + d.icon);
               }
 
-              d3.selectAll("#" + svg_id).select('#' + d.icon)
-                .style("stroke-width", 2)
-                .style("stroke", hover_color);
+              for (q = 0; q < 9; q++){
+                d3.selectAll("#" + svg_id).selectAll('#' + d.icon).selectAll(svg_elements[q])
+                  .style("stroke-width", 2)
+                  .style("stroke", hover_color);
+              }
             }
 
             function handleMouseOut(){
@@ -257,8 +262,10 @@ function icon_append(d, h, modal_url_pfx, modal_id, svg_id, hover_color, section
                   console.log('  mouseout():' + d.icon);
                 }
 
-                d3.selectAll("#" + svg_id).select('#' + d.icon)
-                  .style("stroke-width",0);
+              for (q = 0; q < 9; q++){
+                d3.selectAll("#" + svg_id).selectAll('#' + d.icon).selectAll(svg_elements[q])
+                  .style("stroke-width", 0);
+              }
 
                 tooltip_div.transition()
                   .duration(500);
