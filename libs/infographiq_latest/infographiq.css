@@ -11,7 +11,7 @@
 .panel-title {
   position: relative;
 }
-  
+
 .panel-title::after {
   content: "\f107";
   color: #333;
@@ -49,7 +49,7 @@
   height: 34px;
 }
 
-.switch input { 
+.switch input {
   opacity: 0;
   width: 0;
   height: 0;
@@ -87,7 +87,7 @@
 
 input:checked + .slider {
   background-color: #2196F3;
-    
+
 }
 
 input:focus + .slider {
@@ -102,4 +102,15 @@ input:checked + .slider:before {
   content: "On";
   text-align: center;
   font-weight: bold;
+}
+
+
+/* force modal to front
+see https://github.com/noaa-iea/fk-esr-info/issues/25#issuecomment-837090518 */
+.modal-backdrop {
+    z-index: 100000 !important;
+}
+
+.modal {
+  z-index: 100001 !important;
 }
