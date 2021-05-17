@@ -12,7 +12,6 @@ function appendHtml(el, str) {
   }
 }
 
-
 var svg_elements = ["circle", "ellipse", "line", "mesh", "path", "polygon", "polyline", "rect", "text"];
 
 var modal_html = '<div aria-labelledby="modal-title" class="modal fade bs-example-modal-lg" id="modal" role="dialog" tabindex="-1"><div class="modal-dialog modal-lg" role="document"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button><h4 class="modal-title" id="modal-title">title</h4></div><div class="modal-body"><iframe data-src="" height="100%" width="100%" frameborder="0"></iframe></div><div class="modal-footer"><button class="btn btn-default btn-sm" data-dismiss="modal">Close</button></div></div></div></div>';
@@ -24,11 +23,18 @@ function basename(path) {
 }
 
 // main function to link svg elements to modal popups with data in csv
-function link_svg({svg, csv, svg_id, toc_id, debug = false,
-  hover_color = 'yellow', width = '100%', height = '100%', modal_id = 'modal',
-  modal_url_pfx,
-  toc_style = "list", colored_sections = false,
-  section_colors = ['LightGreen', 'MediumOrchid', 'Orange'], text_toggle = false} = {}) {
+function link_svg({svg, csv, svg_id, toc_id, hover_color = 'yellow', width = '100%', 
+  height = '100%', modal_url_pfx, toc_style = "list", colored_sections = false,
+  section_colors = ['LightGreen', 'MediumOrchid', 'Orange'], text_toggle = false,
+  csv_rows} = {}) {
+
+  if (svg == null | csv == null | svg_id == null | toc_id == null){
+    console.error("ERROR! Values are missing for the required parameters in the function link_svg: svg, csv, svg_id, toc_id.");
+  }
+
+  if (document.getElementById(svg_id) == null | document.getElementById(toc_id) == null){
+    console.error("ERROR! Div tag specified by svg_id or toc_id in the function link_svg does not exist in this html document.");
+  }
 
   d3.xml(svg).then((f) => {
 
@@ -42,10 +48,6 @@ function link_svg({svg, csv, svg_id, toc_id, debug = false,
     // full size
     h.attr('width', width)
      .attr('height', height);
-
-    if (debug){
-      console.log('before data.forEach');
-    }
 
     if (text_toggle === true){
 
@@ -74,6 +76,29 @@ function link_svg({svg, csv, svg_id, toc_id, debug = false,
     }
 
     d3.csv(csv).then(function(data) {
+
+      var csv_columns = data.columns;
+      var svg_col = csv_columns.findIndex(element => element == "svg");
+      if (svg_col > -1){
+        if (csv_rows == null) {
+          console.error("ERROR! Parameter 'csv_rows' in the function link_svg is undefined. The specified csv file contains a column titled 'svg', which requires 'csv_rows' to be defined.");
+        }
+        else {
+          var data_subset = [];
+          data.forEach(function(d) {
+            if (d.svg == csv_rows){
+              data_subset.push(d);
+            }
+          })
+          if (data_subset.length == 0){
+            console.error("ERROR! Value given for 'csv_rows' in the function link_svg can't be found in the 'svg' column of the csv file . All rows of csv file displayed.");
+          }
+          else {
+            data = data_subset;
+          }
+        }
+      }
+
 
       if (toc_style === "accordion" | toc_style === "sectioned_list"){
         data = data.sort(
@@ -142,7 +167,7 @@ function link_svg({svg, csv, svg_id, toc_id, debug = false,
 
           data.forEach(function(d) {
             if (d.section == section_list[i]){
-              section_content = icon_append(d, h, modal_url_pfx, modal_id, svg_id, hover_color, section_content, debug);
+              section_content = icon_append(d, h, modal_url_pfx, svg_id, hover_color, section_content);
             }
           })
         }
@@ -155,7 +180,7 @@ function link_svg({svg, csv, svg_id, toc_id, debug = false,
         else {text_column = false;}
 
         data.forEach(function(d) {
-          section_content = icon_append(d, h, modal_url_pfx, modal_id, svg_id, hover_color, section_content, debug, text_column);
+          section_content = icon_append(d, h, modal_url_pfx, svg_id, hover_color, section_content, text_column);
         })
       } //end: "list" toc_style option
       else if (toc_style === "sectioned_list"){
@@ -175,7 +200,7 @@ function link_svg({svg, csv, svg_id, toc_id, debug = false,
 
           data.forEach(function(d) {
             if (d.section == section_list[i]){
-              section_content = icon_append(d, h, modal_url_pfx, modal_id, svg_id, hover_color, section_content, debug);
+              section_content = icon_append(d, h, modal_url_pfx, svg_id, hover_color, section_content);
             }
           })
         }
@@ -195,11 +220,30 @@ function link_svg({svg, csv, svg_id, toc_id, debug = false,
 
 }
 
-function icon_append(d, h, modal_url_pfx, modal_id, svg_id, hover_color, section_content, debug, text_column = true){
-            if (debug){
-              console.log('forEach d.icon: ' + d.icon);
+function icon_append(d, h, modal_url_pfx, svg_id, hover_color, section_content, text_column = true){
+            if(d.link == null){ // no hyperlink given for modal window
+              if(modal_url_pfx != null){ // does value exist for modal_url_pfx 
+                if(modal_url_pfx.charAt(modal_url_pfx.length-1) != "/"){ // ensure backslash is last character of variable modal_url_pfx
+                  modal_url_pfx = modal_url_pfx + "/";
+                }
+                // add modal_url_pfx to icon name for modal window hyperlink
+                d.link = modal_url_pfx + d.icon + '.html';
+              }
+              else{ // otherwise, icon name is modal window hyperlink
+                d.link = d.icon + '.html';
+              }
             }
-            d.link = modal_url_pfx + d.icon + '.html';
+            else{ // hyperlink given for modal window
+              if (d.link.slice(0, 4) != "http"){ //only modify hyperlink if absolute link not given
+                if(modal_url_pfx != null){ // does value exist for modal_url_pfx 
+                  if(modal_url_pfx.charAt(modal_url_pfx.length-1) != "/"){ // ensure backslash is last character of variable modal_url_pfx
+                    modal_url_pfx = modal_url_pfx + "/";
+                  }
+                // add modal_url_pfx to icon name for modal window hyperlink
+                  d.link = modal_url_pfx + d.link;
+                }
+              }
+            }
             d.title = d.title ? d.title : d.icon;  // fall back on id if title not set
 
             function handleClick(){
@@ -207,31 +251,24 @@ function icon_append(d, h, modal_url_pfx, modal_id, svg_id, hover_color, section
                 window.location = d.link;
               } else {
 
-                if (debug){
-                  console.log('  link:' + d.link);
-                }
-
                 // https://www.drupal.org/node/756722#using-jquery
                 (function ($) {
-                  $('#'+ modal_id).find('iframe')
+                  $('#modal').find('iframe')
                     .prop('src', function(){ return d.link });
 
-                  $('#'+ modal_id + '-title').html( d.title );
+                  $('#modal' + '-title').html( d.title );
 
-                  $('#'+ modal_id).on('show.bs.modal', function () {
+                  $('#modal').on('show.bs.modal', function () {
                     $('.modal-content').css('height',$( window ).height()*0.9);
                     $('.modal-body').css('height','calc(100% - 65px - 55.33px)');
                   });
 
-                  $('#'+ modal_id).modal();
+                  $('#modal').modal();
                 }(jQuery));
               }
             }
 
             function handleMouseOver(){
-              if (debug){
-                  console.log('  mouseover():' + d.icon);
-              }
               for (q = 0; q < 9; q++){
                 d3.selectAll("#" + svg_id).selectAll('#' + d.icon).selectAll(svg_elements[q])
                   .style("stroke-width", 2)
@@ -246,9 +283,6 @@ function icon_append(d, h, modal_url_pfx, modal_id, svg_id, hover_color, section
             }
 
             function handleMouseOverSansTooltip(){
-              if (debug){
-                  console.log(' handleMouseOverSansTooltip():' + d.icon);
-              }
 
               for (q = 0; q < 9; q++){
                 d3.selectAll("#" + svg_id).selectAll('#' + d.icon).selectAll(svg_elements[q])
@@ -258,9 +292,6 @@ function icon_append(d, h, modal_url_pfx, modal_id, svg_id, hover_color, section
             }
 
             function handleMouseOut(){
-              if (debug){
-                  console.log('  mouseout():' + d.icon);
-                }
 
               for (q = 0; q < 9; q++){
                 d3.selectAll("#" + svg_id).selectAll('#' + d.icon).selectAll(svg_elements[q])
