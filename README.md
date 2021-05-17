@@ -84,7 +84,7 @@ Parameters for the `link_svg()` JavaScript function:
 - Optional parameters
   - `hover_color = 'yellow', width = '100%'`
   - `height = '100%'`
-  - `modal_url_pfx` 
+  - `modal_url_pfx` : base filepath of modal window hyperlinks
   - `toc_style = "list"`: table of contents (toc) style. Options are: 
     - `"accordion"`: Bootstrap accordion per header
     - `"list"`: bulleted list
