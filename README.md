@@ -76,24 +76,24 @@ Here is an example of the raw HTML to paste into a page for rendering, including
 ### link_svg()
 
 Parameters for the `link_svg()` JavaScript function:
-
-- `svg`: art (background + icons) in scalable vector graphics (*.svg) format
-- `csv`: table in comma-seperated values (*.csv) format
-- `svg_id`: identifier of `<div>` tag for replacing with `svg`
-- `toc_id`: identifier of `<div>` tag for replacing with table of contents (toc) using `csv`
-- `debug = false` 
-- `hover_color = 'yellow', width = '100%'`
-- `height = '100%'`
-- `modal_id = 'modal'`
-- `modal_url_pfx` 
-- `toc_style = "list"`: table of contents (toc) style. Options are: 
-  - `"accordion"`: Bootstrap accordion per header
-  - `"list"`: bulleted list
-  - `"sectioned_list"`: bulleted list with headers
-  - `"none"`: skip showing table of contents (toc)
-- `colored_sections = false`
-- `section_colors = ['LightGreen', 'MediumOrchid', 'Orange']`
-- `text_toggle = false`
+- Required parameters
+  - `svg`: art (background + icons) in scalable vector graphics (*.svg) format.
+  - `csv`: table in comma-seperated values (*.csv) format
+  - `svg_id`: identifier of `<div>` tag for replacing with `svg`
+  - `toc_id`: identifier of `<div>` tag for replacing with table of contents (toc) using `csv`
+- Optional parameters
+  - `hover_color = 'yellow', width = '100%'`
+  - `height = '100%'`
+  - `modal_url_pfx` 
+  - `toc_style = "list"`: table of contents (toc) style. Options are: 
+    - `"accordion"`: Bootstrap accordion per header
+    - `"list"`: bulleted list
+    - `"sectioned_list"`: bulleted list with headers
+    - `"none"`: skip showing table of contents (toc)
+  - `colored_sections = false`
+  - `section_colors = ['LightGreen', 'MediumOrchid', 'Orange']`
+  - `text_toggle = false`
+  - `csv_rows`: rows of csv table to include (including only rows with a value matching `csv_rows` in the optional svg column of the csv table) 
 
 
 ## Contributing
