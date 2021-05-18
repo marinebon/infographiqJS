@@ -28,8 +28,8 @@ function link_svg({svg, csv, svg_id = 'svg', toc_id = 'toc', hover_color = 'yell
   section_colors = ['LightGreen', 'MediumOrchid', 'Orange'], text_toggle = false,
   svg_filter} = {}) {
 
-  if (svg == null | csv == null | svg_id == null | toc_id == null){
-    console.error("ERROR! Values are missing for the required parameters in the function link_svg: svg, csv, svg_id, toc_id.");
+  if (svg == null | csv == null){
+    console.error("ERROR! Values are missing for the required parameters in the function link_svg: svg, csv");
   }
 
   if (document.getElementById(svg_id) == null | document.getElementById(toc_id) == null){
