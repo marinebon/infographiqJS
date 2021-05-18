@@ -79,9 +79,9 @@ Parameters for the `link_svg()` JavaScript function:
 - Required parameters
   - `svg`: art (background + icons) in scalable vector graphics (*.svg) format.
   - `csv`: table in comma-seperated values (*.csv) format
-  - `svg_id`: identifier of `<div>` tag for replacing with `svg`
-  - `toc_id`: identifier of `<div>` tag for replacing with table of contents (toc) using `csv`
-- Optional parameters
+  - Optional parameters
+  - `svg_id`: identifier of `<div>` tag for replacing with `svg`; default value of 'svg'.
+  - `toc_id`: identifier of `<div>` tag for replacing with table of contents (toc) using `csv`; default value of 'toc'.
   - `hover_color = 'yellow', width = '100%'`
   - `height = '100%'`
   - `modal_url_pfx` : base filepath of modal window hyperlinks
@@ -93,7 +93,7 @@ Parameters for the `link_svg()` JavaScript function:
   - `colored_sections = false`
   - `section_colors = ['LightGreen', 'MediumOrchid', 'Orange']`
   - `text_toggle = false`
-  - `csv_rows`: rows of csv table to include (including only rows with a value matching `csv_rows` in the optional svg column of the csv table) 
+  - `svg_filter`: value to filter the optional column `svg` by rows in the table `csv` for subsetting the icons to link; default is NULL so all rows are used table. 
 
 
 ## Contributing

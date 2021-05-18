@@ -23,10 +23,10 @@ function basename(path) {
 }
 
 // main function to link svg elements to modal popups with data in csv
-function link_svg({svg, csv, svg_id, toc_id, hover_color = 'yellow', width = '100%', 
+function link_svg({svg, csv, svg_id = 'svg', toc_id = 'toc', hover_color = 'yellow', width = '100%', 
   height = '100%', modal_url_pfx, toc_style = "list", colored_sections = false,
   section_colors = ['LightGreen', 'MediumOrchid', 'Orange'], text_toggle = false,
-  csv_rows} = {}) {
+  svg_filter} = {}) {
 
   if (svg == null | csv == null | svg_id == null | toc_id == null){
     console.error("ERROR! Values are missing for the required parameters in the function link_svg: svg, csv, svg_id, toc_id.");
