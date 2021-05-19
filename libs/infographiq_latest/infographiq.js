@@ -80,18 +80,18 @@ function link_svg({svg, csv, svg_id = 'svg', toc_id = 'toc', hover_color = 'yell
       var csv_columns = data.columns;
       var svg_col = csv_columns.findIndex(element => element == "svg");
       if (svg_col > -1){
-        if (csv_rows == null) {
-          console.error("ERROR! Parameter 'csv_rows' in the function link_svg is undefined. The specified csv file contains a column titled 'svg', which requires 'csv_rows' to be defined.");
+        if (svg_filter == null) {
+          console.error("ERROR! Parameter 'svg_filter' in the function link_svg is undefined. The specified csv file contains a column titled 'svg', which requires 'svg_filter' to be defined.");
         }
         else {
           var data_subset = [];
           data.forEach(function(d) {
-            if (d.svg == csv_rows){
+            if (d.svg == svg_filter){
               data_subset.push(d);
             }
           })
           if (data_subset.length == 0){
-            console.error("ERROR! Value given for 'csv_rows' in the function link_svg can't be found in the 'svg' column of the csv file . All rows of csv file displayed.");
+            console.error("ERROR! Value given for 'svg_filter' in the function link_svg can't be found in the 'svg' column of the csv file . All rows of csv file displayed.");
           }
           else {
             data = data_subset;
