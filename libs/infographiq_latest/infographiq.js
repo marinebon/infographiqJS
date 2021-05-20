@@ -324,3 +324,71 @@ function icon_append(d, h, modal_url_pfx, svg_id, hover_color, section_content, 
             }
             return section_content;
 }
+
+// main function to link table elements to modal popups 
+function link_table(csvLink) {
+
+  d3.csv(csvLink).then(function(dataSet) {
+
+    var key_keep = ['EPU', 'Indicator_name', 'indicator_chunk_title', 'time_min', 'time_max'];
+
+    dataSet1 = dataSet.map(function(d) {
+      var arr = [];
+
+      for (key in d) {
+        if (key_keep.includes(key)){
+          arr.push(d[key]);
+        }
+      }
+      return arr;
+    })
+
+    $(document).ready(function() {
+      var table = $('#example').DataTable( {
+            data: dataSet1,
+            columnDefs: [
+              {targets: [ 2 ],
+              visible: false,
+              searchable: false}],
+            columns: [
+              { title: 'Ecological Production Unit' },
+              { title: 'Indicator name' },
+              { title: 'indicator_chunk_title' },
+              { title: 'Year Beginning' },
+              { title: 'Year End' }
+            ]
+        } );
+
+      $('#example tbody').on('click', 'tr', function () {
+        var data = table.row( this ).data();
+        var rowMatch = dataSet.filter(row_id => (row_id .indicator_chunk_title == data[2]))[0];
+
+        document.getElementById('title').innerHTML = rowMatch["Indicator_name"];
+        document.getElementById('caption').innerHTML = rowMatch["caption"];
+        
+        d3.select("#img_target").select("img").remove();
+        d3.select("#img_target").insert("img")
+          .attr("src", rowMatch["image_url"])
+          .attr("alt_text", rowMatch["alt_text"])
+          .attr("style", "max-width:100% ; max-height: auto;");
+        d3.select("#datalink").select("a").remove();
+        d3.select("#datalink").insert("a")
+          .attr("href", rowMatch["data_link"])
+          .attr("target", "_blank")
+          .html(" Data Source.");
+
+        document.getElementById('modal1').style.display='block';
+      } );
+
+    } );
+  });
+  // Get the modal
+  var modal = document.getElementById('modal1');
+
+  // When the user clicks anywhere outside of the modal, close it
+  window.onclick = function(event) {
+      if (event.target == modal) {
+          modal.style.display = "none";
+      }
+  }
+}
