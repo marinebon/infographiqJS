@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+  </head>
+  <body>
+    <h1>Test table</h1>
+    <table id="example" class = "display" width="100%" style = "cursor: pointer;"></table>
+    <div id="modal1" class="modal" >
+      <div class="modal-content animate" >
+        <div class = "container">
+          <h3 style = "text-align: center;"><span id="title"></span></h3>
+          <div id="img_target" ></div>
+          <span id="caption"></span>
+          <span id="datalink"></span>
+        </div>
+        <div class="container" >
+          <button type="button"  onclick="document.getElementById('modal1').style.display='none'" class="closebtn">CLOSE</button>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="https://d3js.org/d3.v6.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css">
+    <script src='https://marinebon.org/infographiqJS/libs/infographiq_latest/infographiq.js'></script>
+    <link rel="stylesheet" href="https://marinebon.org/infographiqJS/libs/infographiq_latest/infographiq_table.css"> 
+    <script>
+        var csvLink1 = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQZzi8jDj1NXHhhzRamvGFjRyhorc2gEWp2WCwo1wMvRr1CJehOZHp16vzhYpO-EMQcia6Yq0L8oO9R/pub?gid=0&single=true&output=csv";
+        link_table(csvLink1);
+    </script>
+  </body>
+</html>
