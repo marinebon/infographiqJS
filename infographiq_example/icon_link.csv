@@ -1,0 +1,6 @@
+svg,icon,title,link,section,not_modal
+svg_example.svg,chartexample1,Google Charts Example,modals/modal_google_charts.html,Category 1,F
+svg_example.svg,chartexample2,Google Charts Example with Trend Bar,modals/modal_google_charts2.html,Category 1,F
+svg_example.svg,chartexample3,Highcharts Example,modals/modal_highcharts.html,Category 1,F
+svg_example.svg,chartexample4,Charts as Image Example,modals/modal_image.html,Category 2,F
+svg_example.svg,chartexample5,Link Out to Other Page,https://www.noaa.gov/,Category 2,T

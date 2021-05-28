@@ -1,0 +1,40 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+    <title>Template Infographic</title>
+    <meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<script src="https://code.jquery.com/jquery-1.9.1.min.js"
+  integrity="sha256-wS9gmOZBqsqWxgIVgA8Y9WcQOa7PgSIX+rPA0VL2rbQ="
+  crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <script src="https://d3js.org/d3.v5.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://marinebon.org/infographiqJS/libs/infographiq_latest/infographiq.css"> 
+   <!-- <style>.modal-title { color: black; }</style> -->
+	</head>
+	<body>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-9">
+          <div id = "svg1"></div>
+        </div>
+        <div class="col-md-3">
+          <ul class="panel-group" id="toc1" role="tablist" aria-multiselectable="true"></ul>
+        </div>
+      </div>
+    </div>
+
+  <!-- infographiq: run function to link the svg with the svg_list -->
+ <script src='https://marinebon.org/infographiqJS/libs/infographiq_latest/infographiq.js'></script> 
+  <script>
+    link_svg({
+      svg: 'svg_example.svg', 
+      csv: 'icon_link.csv', 
+      svg_id: "svg1", 
+      toc_id: "toc1",
+      toc_style: "sectioned_list",
+      svg_filter: "svg_example.svg"});
+  </script>
+</body>
+</html>
