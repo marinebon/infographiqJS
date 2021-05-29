@@ -325,58 +325,82 @@ function icon_append(d, h, modal_url_pfx, svg_id, hover_color, section_content, 
             return section_content;
 }
 
-// main function to link table elements to modal popups 
+// main function to link table elements to modal popups. 
+// The only argument taken is 'csvLink' which is a link to a csv file with the following columns:
+// EPU, indicator_name, indicator_chunk_title, image_url, caption, alt_text, data_link, time_min, time_max, methods_link
 function link_table(csvLink) {
-
+  // load in csv file 
   d3.csv(csvLink).then(function(dataSet) {
 
-    var key_keep = ['EPU', 'Indicator_name', 'indicator_chunk_title', 'time_min', 'time_max'];
-
+    // get rid of keys in array of dataSet (the javascript library DataTable that generates the html table doesn't do well with keyed arrays)
     dataSet1 = dataSet.map(function(d) {
       var arr = [];
-
       for (key in d) {
-        if (key_keep.includes(key)){
-          arr.push(d[key]);
-        }
+        arr.push(d[key]);
       }
       return arr;
     })
 
+    //pass the loaded data to DataTable. Note that most of the columns are invisible - they are used to generate the modal content only
     $(document).ready(function() {
       var table = $('#example').DataTable( {
             data: dataSet1,
             columnDefs: [
-              {targets: [ 2 ],
+              {targets: [2, 3, 4, 5, 6, 9],
               visible: false,
               searchable: false}],
             columns: [
               { title: 'Ecological Production Unit' },
               { title: 'Indicator name' },
               { title: 'indicator_chunk_title' },
+              { title: 'image_url' },
+              { title: 'caption' },
+              { title: 'alt_text' },   
+              { title: 'data_link' },                           
               { title: 'Year Beginning' },
-              { title: 'Year End' }
+              { title: 'Year End' },
+              { title: 'methods_link' }
             ]
         } );
 
+      // when someone clicks on a row generate the relevant modal window based upon the data mostly in the hidden cells of that row
       $('#example tbody').on('click', 'tr', function () {
         var data = table.row( this ).data();
-        var rowMatch = dataSet.filter(row_id => (row_id .indicator_chunk_title == data[2]))[0];
+        document.getElementById('title').innerHTML = data[1];
+        document.getElementById('caption').innerHTML = data[4];
 
-        document.getElementById('title').innerHTML = rowMatch["Indicator_name"];
-        document.getElementById('caption').innerHTML = rowMatch["caption"];
-        
+        // most elements in the modal window are a 1 to 1 copy/paste from the cells in the data table
+        // the image source is different. The image link given in the table is for the github page for 
+        // an image, but we want the raw image on github. The following translates the former to the latter.
+        var img_src = data[3];
+        img_src = "https://raw.githubusercontent.com/" + img_src.split("https://github.com/")[1];
+        img_src = img_src.split("blob/")[0] + img_src.split("blob/")[1];
+
         d3.select("#img_target").select("img").remove();
         d3.select("#img_target").insert("img")
-          .attr("src", rowMatch["image_url"])
-          .attr("alt_text", rowMatch["alt_text"])
+          .attr("src", img_src)
+          .attr("alt_text", data[5])
           .attr("style", "max-width:100% ; max-height: auto;");
         d3.select("#datalink").select("a").remove();
-        d3.select("#datalink").insert("a")
-          .attr("href", rowMatch["data_link"])
+        d3.select("#datalink").select("i").remove();
+        d3.select("#datalink").append("i")
+          .attr("class", "fas fa-external-link-alt");     
+        d3.select("#datalink").append("a")
+          .attr("href", data[6])
           .attr("target", "_blank")
           .html(" Data Source.");
+        d3.select("#methodslink").select("a").remove();
+        d3.select("#methodslink").select("i").remove();
 
+        // only add a data methodology link if one is given.
+        if (data[9] != ""){
+          d3.select("#methodslink").append("i")
+            .attr("class", "fas fa-external-link-alt");  
+          d3.select("#methodslink").append("a")
+            .attr("href", data[9])
+            .attr("target", "_blank")
+            .html(" Graph Methodology.");
+        }
         document.getElementById('modal1').style.display='block';
       } );
 

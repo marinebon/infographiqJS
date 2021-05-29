@@ -4,7 +4,7 @@
     <meta charset="utf-8"/>
   </head>
   <body>
-    <h1>Test table</h1>
+    <h1>Table</h1>
     <table id="example" class = "display" width="100%" style = "cursor: pointer;"></table>
     <div id="modal1" class="modal" >
       <div class="modal-content animate" >
@@ -13,6 +13,7 @@
           <div id="img_target" ></div>
           <span id="caption"></span>
           <span id="datalink"></span>
+          <span id="methodslink"></span>
         </div>
         <div class="container" >
           <button type="button"  onclick="document.getElementById('modal1').style.display='none'" class="closebtn">CLOSE</button>
@@ -24,10 +25,11 @@
     <script src="https://d3js.org/d3.v6.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css">
-    <script src='https://marinebon.org/infographiqJS/libs/infographiq_latest/infographiq.js'></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.0/css/all.min.css">
+  <script src='https://marinebon.org/infographiqJS/libs/infographiq_latest/infographiq.js'></script>
     <link rel="stylesheet" href="https://marinebon.org/infographiqJS/libs/infographiq_latest/infographiq_table.css"> 
     <script>
-        var csvLink1 = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQZzi8jDj1NXHhhzRamvGFjRyhorc2gEWp2WCwo1wMvRr1CJehOZHp16vzhYpO-EMQcia6Yq0L8oO9R/pub?gid=0&single=true&output=csv";
+        var csvLink1 = "https://docs.google.com/spreadsheets/d/e/2PACX-1vS3WnWFSuZA3I6d16n9bJo33cd_3mL6_XVIf1CRbKzJM6NvLKs6B39-m6jfRfZyFr2lxGQ7dcN0MWxl/pub?gid=0&single=true&output=csv";
         link_table(csvLink1);
     </script>
   </body>
