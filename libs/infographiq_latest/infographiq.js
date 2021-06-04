@@ -99,7 +99,6 @@ function link_svg({svg, csv, svg_id = 'svg', toc_id = 'toc', hover_color = 'yell
         }
       }
 
-
       if (toc_style === "accordion" | toc_style === "sectioned_list"){
         data = data.sort(
           function(a,b) { return d3.ascending(a.section, b.section) ||  d3.ascending(a.title, b.title) });
@@ -167,6 +166,7 @@ function link_svg({svg, csv, svg_id = 'svg', toc_id = 'toc', hover_color = 'yell
 
           data.forEach(function(d) {
             if (d.section == section_list[i]){
+              element_highlight_add(d.icon, svg_id, hover_color);
               section_content = icon_append(d, h, modal_url_pfx, svg_id, hover_color, section_content);
             }
           })
@@ -180,6 +180,7 @@ function link_svg({svg, csv, svg_id = 'svg', toc_id = 'toc', hover_color = 'yell
         else {text_column = false;}
 
         data.forEach(function(d) {
+          element_highlight_add(d.icon, svg_id, hover_color);
           section_content = icon_append(d, h, modal_url_pfx, svg_id, hover_color, section_content, text_column);
         })
       } //end: "list" toc_style option
@@ -200,6 +201,7 @@ function link_svg({svg, csv, svg_id = 'svg', toc_id = 'toc', hover_color = 'yell
 
           data.forEach(function(d) {
             if (d.section == section_list[i]){
+                        element_highlight_add(d.icon, svg_id, hover_color);
               section_content = icon_append(d, h, modal_url_pfx, svg_id, hover_color, section_content);
             }
           })
@@ -214,10 +216,27 @@ function link_svg({svg, csv, svg_id = 'svg', toc_id = 'toc', hover_color = 'yell
   // turn off questions by default
   d3.select("#text").attr("display", "none");
 
-
-
   }); // d3.xml(svg).then((f) => {
 
+}
+
+// This helper function makes a copy of a highlightable element of the svg (icon_id in the function parameters).
+// The copy is highlighted in the color indicated by the parameter 'hover_color'. The copy is then hidden.
+function element_highlight_add(icon_id, svg_id, hover_color){
+
+  let selected_svg = document.getElementById(svg_id);
+  let p = selected_svg.querySelectorAll("#" + icon_id)[0];
+  let p_prime = p.cloneNode(true);
+  p_prime.id = icon_id + "_highlight";
+  p.parentNode.insertBefore(p_prime, p.parentNode.childNodes[0]);
+
+  for (q = 0; q < 9; q++){
+    d3.selectAll("#" + svg_id).selectAll("#" + p_prime.id).selectAll(svg_elements[q])
+      .style("stroke-width", 2)
+      .style("stroke", hover_color);
+  }
+
+  d3.selectAll("#" + svg_id).selectAll("#" + p_prime.id).style("opacity", "0");
 }
 
 function icon_append(d, h, modal_url_pfx, svg_id, hover_color, section_content, text_column = true){
@@ -269,11 +288,8 @@ function icon_append(d, h, modal_url_pfx, svg_id, hover_color, section_content, 
             }
 
             function handleMouseOver(){
-              for (q = 0; q < 9; q++){
-                d3.selectAll("#" + svg_id).selectAll('#' + d.icon).selectAll(svg_elements[q])
-                  .style("stroke-width", 2)
-                  .style("stroke", hover_color);
-              }
+              d3.selectAll("#" + svg_id).selectAll("#" + d.icon).style("opacity", "0");
+              d3.selectAll("#" + svg_id).selectAll("#" + d.icon + "_highlight").style("opacity", "100");
               tooltip_div.transition()
                 .duration(200)
                 .style("opacity", 0.8);
@@ -283,20 +299,15 @@ function icon_append(d, h, modal_url_pfx, svg_id, hover_color, section_content, 
             }
 
             function handleMouseOverSansTooltip(){
+              d3.selectAll("#" + svg_id).selectAll("#" + d.icon).style("opacity", "0");
+              d3.selectAll("#" + svg_id).selectAll("#" + d.icon + "_highlight").style("opacity", "100");
 
-              for (q = 0; q < 9; q++){
-                d3.selectAll("#" + svg_id).selectAll('#' + d.icon).selectAll(svg_elements[q])
-                  .style("stroke-width", 2)
-                  .style("stroke", hover_color);
-              }
             }
 
             function handleMouseOut(){
 
-              for (q = 0; q < 9; q++){
-                d3.selectAll("#" + svg_id).selectAll('#' + d.icon).selectAll(svg_elements[q])
-                  .style("stroke-width", 0);
-              }
+              d3.selectAll("#" + svg_id).selectAll("#" + d.icon).style("opacity", "100");
+              d3.selectAll("#" + svg_id).selectAll("#" + d.icon + "_highlight").style("opacity", "0");
 
                 tooltip_div.transition()
                   .duration(500);
