@@ -223,117 +223,119 @@ function link_svg({svg, csv, svg_id = 'svg', toc_id = 'toc', hover_color = 'yell
 // This helper function makes a copy of a highlightable element of the svg (icon_id in the function parameters).
 // The copy is highlighted in the color indicated by the parameter 'hover_color'. The copy is then hidden.
 function element_highlight_add(icon_id, svg_id, hover_color){
+  try{
+    let selected_svg = document.getElementById(svg_id);
+    let p = selected_svg.querySelectorAll("#" + icon_id)[0];
+    let p_prime = p.cloneNode(true);
+    p_prime.id = icon_id + "_highlight";
+    p.parentNode.insertBefore(p_prime, p.parentNode.childNodes[0]);
 
-  let selected_svg = document.getElementById(svg_id);
-  let p = selected_svg.querySelectorAll("#" + icon_id)[0];
-  let p_prime = p.cloneNode(true);
-  p_prime.id = icon_id + "_highlight";
-  p.parentNode.insertBefore(p_prime, p.parentNode.childNodes[0]);
+    for (q = 0; q < 9; q++){
+      d3.selectAll("#" + svg_id).selectAll("#" + p_prime.id).selectAll(svg_elements[q])
+        .style("stroke-width", 2)
+        .style("stroke", hover_color);
+    }
 
-  for (q = 0; q < 9; q++){
-    d3.selectAll("#" + svg_id).selectAll("#" + p_prime.id).selectAll(svg_elements[q])
-      .style("stroke-width", 2)
-      .style("stroke", hover_color);
+    d3.selectAll("#" + svg_id).selectAll("#" + p_prime.id).style("opacity", "0");
   }
-
-  d3.selectAll("#" + svg_id).selectAll("#" + p_prime.id).style("opacity", "0");
+  catch {}
 }
 
 function icon_append(d, h, modal_url_pfx, svg_id, hover_color, section_content, text_column = true){
-            if(d.link == null){ // no hyperlink given for modal window
-              if(modal_url_pfx != null){ // does value exist for modal_url_pfx 
-                if(modal_url_pfx.charAt(modal_url_pfx.length-1) != "/"){ // ensure backslash is last character of variable modal_url_pfx
-                  modal_url_pfx = modal_url_pfx + "/";
-                }
-                // add modal_url_pfx to icon name for modal window hyperlink
-                d.link = modal_url_pfx + d.icon + '.html';
-              }
-              else{ // otherwise, icon name is modal window hyperlink
-                d.link = d.icon + '.html';
-              }
-            }
-            else{ // hyperlink given for modal window
-              if (d.link.slice(0, 4) != "http"){ //only modify hyperlink if absolute link not given
-                if(modal_url_pfx != null){ // does value exist for modal_url_pfx 
-                  if(modal_url_pfx.charAt(modal_url_pfx.length-1) != "/"){ // ensure backslash is last character of variable modal_url_pfx
-                    modal_url_pfx = modal_url_pfx + "/";
-                  }
-                // add modal_url_pfx to icon name for modal window hyperlink
-                  d.link = modal_url_pfx + d.link;
-                }
-              }
-            }
-            d.title = d.title ? d.title : d.icon;  // fall back on id if title not set
+  if(d.link == null){ // no hyperlink given for modal window
+    if(modal_url_pfx != null){ // does value exist for modal_url_pfx 
+      if(modal_url_pfx.charAt(modal_url_pfx.length-1) != "/"){ // ensure backslash is last character of variable modal_url_pfx
+        modal_url_pfx = modal_url_pfx + "/";
+      }
+      // add modal_url_pfx to icon name for modal window hyperlink
+      d.link = modal_url_pfx + d.icon + '.html';
+    }
+    else{ // otherwise, icon name is modal window hyperlink
+      d.link = d.icon + '.html';
+    }
+  }
+  else{ // hyperlink given for modal window
+    if (d.link.slice(0, 4) != "http"){ //only modify hyperlink if absolute link not given
+      if(modal_url_pfx != null){ // does value exist for modal_url_pfx 
+        if(modal_url_pfx.charAt(modal_url_pfx.length-1) != "/"){ // ensure backslash is last character of variable modal_url_pfx
+          modal_url_pfx = modal_url_pfx + "/";
+        }
+      // add modal_url_pfx to icon name for modal window hyperlink
+        d.link = modal_url_pfx + d.link;
+      }
+    }
+  }
+  d.title = d.title ? d.title : d.icon;  // fall back on id if title not set
 
-            function handleClick(){
-              if (d.not_modal == 'T'){
-                window.location = d.link;
-              } else {
+  function handleClick(){
+    if (d.not_modal == 'T'){
+      window.location = d.link;
+    } else {
 
-                // https://www.drupal.org/node/756722#using-jquery
-                (function ($) {
-                  $('#modal').find('iframe')
-                    .prop('src', function(){ return d.link });
+      // https://www.drupal.org/node/756722#using-jquery
+      (function ($) {
+        $('#modal').find('iframe')
+          .prop('src', function(){ return d.link });
 
-                  $('#modal' + '-title').html( d.title );
+        $('#modal' + '-title').html( d.title );
 
-                  $('#modal').on('show.bs.modal', function () {
-                    $('.modal-content').css('height',$( window ).height()*0.9);
-                    $('.modal-body').css('height','calc(100% - 65px - 55.33px)');
-                  });
+        $('#modal').on('show.bs.modal', function () {
+          $('.modal-content').css('height',$( window ).height()*0.9);
+          $('.modal-body').css('height','calc(100% - 65px - 55.33px)');
+        });
 
-                  $('#modal').modal();
-                }(jQuery));
-              }
-            }
+        $('#modal').modal();
+      }(jQuery));
+    }
+  }
 
-            function handleMouseOver(){
-              d3.selectAll("#" + svg_id).selectAll("#" + d.icon).style("opacity", "0");
-              d3.selectAll("#" + svg_id).selectAll("#" + d.icon + "_highlight").style("opacity", "100");
-              tooltip_div.transition()
-                .duration(200)
-                .style("opacity", 0.8);
-              tooltip_div.html(d.title + "<br/>")
-                .style("left", (d3.event.pageX) + "px")
-                .style("top", (d3.event.pageY - 28) + "px");
-            }
+  function handleMouseOver(){
+    d3.selectAll("#" + svg_id).selectAll("#" + d.icon).style("opacity", "0");
+    d3.selectAll("#" + svg_id).selectAll("#" + d.icon + "_highlight").style("opacity", "100");
+    tooltip_div.transition()
+      .duration(200)
+      .style("opacity", 0.8);
+    tooltip_div.html(d.title + "<br/>")
+      .style("left", (d3.event.pageX) + "px")
+      .style("top", (d3.event.pageY - 28) + "px");
+  }
 
-            function handleMouseOverSansTooltip(){
-              d3.selectAll("#" + svg_id).selectAll("#" + d.icon).style("opacity", "0");
-              d3.selectAll("#" + svg_id).selectAll("#" + d.icon + "_highlight").style("opacity", "100");
+  function handleMouseOverSansTooltip(){
+    d3.selectAll("#" + svg_id).selectAll("#" + d.icon).style("opacity", "0");
+    d3.selectAll("#" + svg_id).selectAll("#" + d.icon + "_highlight").style("opacity", "100");
 
-            }
+  }
 
-            function handleMouseOut(){
+  function handleMouseOut(){
 
-              d3.selectAll("#" + svg_id).selectAll("#" + d.icon).style("opacity", "100");
-              d3.selectAll("#" + svg_id).selectAll("#" + d.icon + "_highlight").style("opacity", "0");
+    d3.selectAll("#" + svg_id).selectAll("#" + d.icon).style("opacity", "100");
+    d3.selectAll("#" + svg_id).selectAll("#" + d.icon + "_highlight").style("opacity", "0");
 
-                tooltip_div.transition()
-                  .duration(500);
-                tooltip_div.style("opacity", 0);
-            }
+      tooltip_div.transition()
+        .duration(500);
+      tooltip_div.style("opacity", 0);
+  }
 
-            h.select('#' + d.icon)
-              .on("click", handleClick)
-              .on('mouseover', handleMouseOver)
-              .on('mouseout', handleMouseOut);
+  h.select('#' + d.icon)
+    .on("click", handleClick)
+    .on('mouseover', handleMouseOver)
+    .on('mouseout', handleMouseOut);
 
-            // set outline of paths within group to null
-            d3.selectAll("#" + svg_id).select('#' + d.icon).selectAll("path")
-                .style("stroke-width", null)
-                .style("stroke", null);
+  // set outline of paths within group to null
+  d3.selectAll("#" + svg_id).select('#' + d.icon).selectAll("path")
+      .style("stroke-width", null)
+      .style("stroke", null);
 
-            if (text_column === true){
-              // add to bulleted list of svg elements
-              list_text = d.title ? d.title : d.icon;  // fall back on id if title not set
-              section_content.append("li").append("a")
-                .text(list_text)
-                .on("click", handleClick)
-                .on('mouseover', handleMouseOverSansTooltip)
-                .on('mouseout', handleMouseOut);
-            }
-            return section_content;
+  if (text_column === true){
+    // add to bulleted list of svg elements
+    list_text = d.title ? d.title : d.icon;  // fall back on id if title not set
+    section_content.append("li").append("a")
+      .text(list_text)
+      .on("click", handleClick)
+      .on('mouseover', handleMouseOverSansTooltip)
+      .on('mouseout', handleMouseOut);
+  }
+  return section_content;
 }
 
 // main function to link table elements to modal popups. 
