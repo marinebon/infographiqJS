@@ -34,17 +34,17 @@
      guidetolerance="10"
      inkscape:pageopacity="0"
      inkscape:pageshadow="2"
-     inkscape:window-width="2631"
+     inkscape:window-width="2702"
      inkscape:window-height="1347"
      id="namedview1153"
      showgrid="false"
-     inkscape:zoom="2"
-     inkscape:cx="190.5231"
+     inkscape:zoom="4.043771"
+     inkscape:cx="170.47937"
      inkscape:cy="148.77465"
-     inkscape:window-x="2"
-     inkscape:window-y="34"
+     inkscape:window-x="34"
+     inkscape:window-y="23"
      inkscape:window-maximized="0"
-     inkscape:current-layer="text"
+     inkscape:current-layer="background_elements"
      inkscape:document-rotation="0" />
   <defs
      id="defs1107">
@@ -192,7 +192,7 @@
        fx="189.78439"
        fy="166.03484"
        r="200.58048"
-       gradientTransform="matrix(2.6627893,-6.4430094e-4,5.1801666e-4,2.0315832,-315.6575,-177.65648)"
+       gradientTransform="matrix(2.6627893,-6.4430094e-4,5.1801666e-4,2.0315832,-305.27116,-196.45082)"
        gradientUnits="userSpaceOnUse" />
   </defs>
   <g
@@ -205,8 +205,72 @@
        id="rect2033"
        width="378.58142"
        height="319.99313"
-       x="0.49368215"
-       y="-0.46172261" />
+       x="10.880027"
+       y="-19.256062" />
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="chartexample5"
+     inkscape:label="chartexample5"
+     style="display:inline">
+    <ellipse
+       style="opacity:1;fill:#edf600;fill-opacity:1;stroke:#000000;stroke-width:1;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="path2200"
+       cx="181.5"
+       cy="236.25"
+       rx="53.418098"
+       ry="47.668098" />
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="chartexample4"
+     inkscape:label="chartexample4"
+     style="display:inline">
+    <ellipse
+       style="fill:#a50000;fill-opacity:1;stroke:#000000;stroke-width:1;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="path2159"
+       cx="158.82515"
+       cy="57.889542"
+       rx="57.823578"
+       ry="48.069294" />
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="chartexample3"
+     inkscape:label="chartexample3"
+     style="display:inline">
+    <rect
+       style="display:inline;opacity:1;fill:#0000ac;fill-opacity:1;stroke:#000000;stroke-width:1;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="rect2187"
+       width="90.649994"
+       height="77.099991"
+       x="255.84"
+       y="15.049999" />
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="chartexample2"
+     inkscape:label="chartexample2">
+    <rect
+       style="display:inline;opacity:1;fill:#00ac12;fill-opacity:1;stroke:#000000;stroke-width:1;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="rect2013"
+       width="90.649994"
+       height="77.099991"
+       x="21.158064"
+       y="120.14992" />
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="chartexample1"
+     inkscape:label="chartexample1"
+     style="display:inline">
+    <ellipse
+       style="opacity:1;fill:#c600f6;fill-opacity:1;stroke:#000000;stroke-width:1;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="ellipse2009"
+       cx="311.82388"
+       cy="232.78789"
+       rx="53.418098"
+       ry="47.668098" />
   </g>
   <g
      inkscape:groupmode="layer"
@@ -214,7 +278,7 @@
      inkscape:label="text">
     <text
        xml:space="preserve"
-       style="display:inline;font-size:40px;line-height:1.25;font-family:sans-serif;text-align:center;text-anchor:middle"
+       style="font-size:40px;line-height:1.25;font-family:sans-serif;text-align:center;text-anchor:middle;display:inline"
        x="280"
        y="126"
        id="text69"><tspan
@@ -233,89 +297,5 @@
          id="tspan74"
          x="206.5"
          y="176">more text</tspan></text>
-  </g>
-  <g
-     inkscape:groupmode="layer"
-     id="chartexample5"
-     inkscape:label="chartexample5">
-    <ellipse
-       style="opacity:1;fill:#edf600;fill-opacity:1;stroke:none;stroke-width:1.1;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-       id="path2200"
-       cx="181.5"
-       cy="236.25"
-       rx="53.418098"
-       ry="47.668098" />
-  </g>
-  <g
-     inkscape:groupmode="layer"
-     id="chartexample4"
-     inkscape:label="chartexample4"
-     style="display:inline">
-    <ellipse
-       style="fill:#a50000;fill-opacity:1;stroke:none;stroke-width:4.5;stroke-miterlimit:4;stroke-dasharray:none"
-       id="path2159"
-       cx="158.82515"
-       cy="57.889542"
-       rx="57.823578"
-       ry="48.069294" />
-  </g>
-  <g
-     inkscape:groupmode="layer"
-     id="chartexample3"
-     inkscape:label="chartexample3">
-    <rect
-       style="display:inline;opacity:1;fill:#0000ac;fill-opacity:1;stroke:none;stroke-width:1.1;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-       id="rect2187"
-       width="90.649994"
-       height="77.099991"
-       x="255.84"
-       y="15.049999" />
-  </g>
-  <g
-     inkscape:groupmode="layer"
-     id="chartexample2"
-     inkscape:label="chartexample2"
-     style="display:inline">
-    <path
-       sodipodi:type="star"
-       style="opacity:1;fill:#09ac00;fill-opacity:1;stroke:none;stroke-width:1.1;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-       id="path2198"
-       sodipodi:sides="5"
-       sodipodi:cx="67.916054"
-       sodipodi:cy="179.07166"
-       sodipodi:r1="63.007935"
-       sodipodi:r2="28.46541"
-       sodipodi:arg1="-1.586668"
-       sodipodi:arg2="-0.95834948"
-       inkscape:flatsided="false"
-       inkscape:rounded="0"
-       inkscape:randomized="0"
-       d="m 66.916054,116.07166 17.363947,39.70835 43.243599,2.87252 -32.399136,28.78465 10.631076,42.01476 L 68.367829,207.53348 31.6946,230.62751 40.986856,188.29651 7.6904778,160.55464 50.821119,156.3111 Z"
-       inkscape:transform-center-x="0.309017"
-       inkscape:transform-center-y="-5.7220721" />
-  </g>
-  <g
-     inkscape:groupmode="layer"
-     id="chartexample1"
-     inkscape:label="chartexample1"
-     style="display:inline">
-    <path
-       sodipodi:type="star"
-       style="fill:#be3ab7;fill-opacity:1;stroke:none;stroke-width:0.94986598;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-       id="path2163"
-       sodipodi:sides="6"
-       sodipodi:cx="308.08749"
-       sodipodi:cy="220.7459"
-       sodipodi:r1="43.930618"
-       sodipodi:r2="35.540619"
-       sodipodi:arg1="0.86740561"
-       sodipodi:arg2="1.3910044"
-       inkscape:flatsided="true"
-       inkscape:rounded="0"
-       inkscape:randomized="0"
-       d="m 336.50214,254.24973 -43.2225,7.85589 -28.41464,-33.50384 14.80785,-41.35972 43.22249,-7.85589 28.41465,33.50384 z"
-       inkscape:transform-center-x="1.1908715"
-       inkscape:transform-center-y="-3.6861478"
-       transform="matrix(1.1696295,0,0,1.1466012,-44.83898,-26.212175)" />
   </g>
 </svg>
