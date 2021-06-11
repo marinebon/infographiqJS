@@ -8,6 +8,13 @@ To see the latest functionality, please try the:
 
 - [**demo**](./demo.html)
 
+## Simple Example
+
+Here is a simple inforgraphic example, showing both Illustrator and Inkscape, to walk through in the instructions:
+
+- [**simple example**](infographiq_example/infographic.html)
+- [**download simple example**](./infographiq_example.zip)
+
 ## Changes
 
 To see the latest changes, check out the:
