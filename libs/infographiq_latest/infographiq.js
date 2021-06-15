@@ -25,15 +25,19 @@ function basename(path) {
 // main function to link svg elements to modal popups with data in csv
 function link_svg({svg, csv, svg_id = 'svg', toc_id = 'toc', hover_color = 'yellow', width = '100%', 
   height = '100%', modal_url_pfx, toc_style = "list", colored_sections = false,
-  section_colors = ['LightGreen', 'MediumOrchid', 'Orange'], text_toggle = false,
+  section_colors = ['LightGreen', 'MediumOrchid', 'Orange'], text_toggle = 'none',
   svg_filter} = {}) {
 
   if (svg == null | csv == null){
-    console.error("ERROR! Values are missing for the required parameters in the function link_svg: svg, csv");
+    console.error("ERROR with link_svg function! Values are missing for required parameters in the function: svg, csv");
   }
 
   if (document.getElementById(svg_id) == null | document.getElementById(toc_id) == null){
-    console.error("ERROR! Div tag specified by svg_id or toc_id in the function link_svg does not exist in this html document.");
+    console.error("ERROR with link_svg function! Div tag specified by svg_id or toc_id in the function link_svg does not exist in this html document.");
+  }
+
+  if (text_toggle != 'none' & text_toggle != 'toggle_off' &  text_toggle != 'toggle_on'){
+    console.error("ERROR with parameter text_toggle in link_svg function! The parameter text_toggle can only have one of the following values: 'none', 'toggle_off', or 'toggle_on'");
   }
 
   d3.xml(svg).then((f) => {
@@ -49,7 +53,7 @@ function link_svg({svg, csv, svg_id = 'svg', toc_id = 'toc', hover_color = 'yell
     h.attr('width', width)
      .attr('height', height);
 
-    if (text_toggle === true){
+    if (text_toggle != 'none'){
 
       function toggleText(){
         display = d3.select("#" + toc_id + "Checkbox").property("checked") ? "inline" : "none";
@@ -72,6 +76,10 @@ function link_svg({svg, csv, svg_id = 'svg', toc_id = 'toc', hover_color = 'yell
 
       d3.select("#" + toc_id + "Toggle").append("span")
         .attr("class", "slider");
+
+      if (text_toggle == 'toggle_on') {
+        d3.select("#" + toc_id + "Checkbox").property('checked', true);
+      }
 
     }
 
@@ -214,8 +222,9 @@ function link_svg({svg, csv, svg_id = 'svg', toc_id = 'toc', hover_color = 'yell
     }); // end: d3.csv()
 
   // turn off questions by default
-  d3.select("#text").attr("display", "none");
-
+  if (text_toggle != 'toggle_on') {
+    d3.select("#text").attr("display", "none");
+  }
   }); // d3.xml(svg).then((f) => {
 
 }

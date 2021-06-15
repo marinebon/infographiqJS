@@ -61,11 +61,14 @@
       </div>
       <div class="col-md-2">
         <p style = "font-weight: bold; text-decoration: underline;">Explanatory text toggle:</p>
-        <input type="radio" id="text_toggle_false" name="text_toggle" value="false" checked>
-        <label for="text_toggle_false">False</label>
+        <input type="radio" id="text_toggle_none" name="text_toggle" value="none" checked>
+        <label for="text_toggle_none">None</label>
         <br>
-        <input type="radio" id="text_toggle_true" name="text_toggle" value="true">
-        <label for="text_toggle_true">True</label>
+        <input type="radio" id="text_toggle_off" name="text_toggle" value="text_toggle_off">
+        <label for="text_toggle_off">Text toggle off</label>
+        br>
+        <input type="radio" id="text_toggle_on" name="text_toggle" value="text_toggle_on">
+        <label for="text_toggle_on">Text toggle on</label>
       </div>
       <div class="col-md-2">
         <p></p>
@@ -108,7 +111,7 @@
       var toc_style = d3.select('input[name="toc_style"]:checked').property("value");
       var color_check = d3.select('input[name="colored_section"]:checked').property("value");
       var colored_sections = (color_check != 'none');
-      var text_toggle = (d3.select('input[name="text_toggle"]:checked').property("value") == 'true');
+      var text_toggle = d3.select('input[name="text_toggle"]:checked').property("value");
       var color_array = [];
 
       if (color_check == "ocean"){
@@ -122,7 +125,7 @@
       }
 
       link_svg({
-        svg: 'https://noaa-iea.github.io/fk-esr-info/assets/svg/FKIEA_Ecosystem-text.svg',
+        svg: 'demo.svg',
         csv: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSAROGVpYB58Zkr8P0iwJdTMRPNLZtJ07IyUn-dQ62C2HMuCEScyl8x7urCD7QbRXQYSIJwDn_wku9G/pub?gid=0&single=true&output=csv',
         svg_id: 'svg',
         toc_id: 'toc',
