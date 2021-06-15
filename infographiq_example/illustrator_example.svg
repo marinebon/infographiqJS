@@ -1,7 +1,7 @@
 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="378.06" height="318.29" viewBox="0 0 378.06 318.29">
   <defs>
     <style>
-      .cls-1, .cls-2, .cls-3, .cls-4, .cls-5, .cls-6 {
+      .cls-1, .cls-2, .cls-3, .cls-4, .cls-5, .cls-6, .cls-7 {
         stroke: #231f20;
         stroke-miterlimit: 10;
       }
@@ -31,32 +31,39 @@
       }
 
       .cls-7 {
-        font-size: 18px;
-        fill: #231f20;
-        font-family: MyriadPro-Regular, Myriad Pro;
+        fill: none;
       }
 
-      .cls-8 {
-        letter-spacing: 0.01em;
+      .cls-8, .cls-9 {
+        fill: #231f20;
       }
 
       .cls-9 {
-        letter-spacing: -0.01em;
+        font-size: 18px;
+        font-family: MyriadPro-Regular, Myriad Pro;
       }
 
       .cls-10 {
-        letter-spacing: 0em;
-      }
-
-      .cls-11 {
         letter-spacing: 0.01em;
       }
 
-      .cls-12 {
+      .cls-11 {
         letter-spacing: -0.01em;
       }
 
+      .cls-12 {
+        letter-spacing: 0em;
+      }
+
       .cls-13 {
+        letter-spacing: 0.01em;
+      }
+
+      .cls-14 {
+        letter-spacing: -0.01em;
+      }
+
+      .cls-15 {
         letter-spacing: 0em;
       }
     </style>
@@ -90,7 +97,15 @@
     </g>
   </g>
   <g id="text">
-    <text class="cls-7" transform="translate(97.44 142.81)"><tspan class="cls-8">S</tspan><tspan x="8.98" y="0">ome sample </tspan><tspan class="cls-9" x="104.85" y="0">t</tspan><tspan class="cls-10" x="110.7" y="0">e</tspan><tspan class="cls-11" x="119.66" y="0">x</tspan><tspan x="128.23" y="0">t</tspan></text>
-    <text class="cls-7" transform="translate(221.3 171.45)"><tspan class="cls-8">M</tspan><tspan x="14.58" y="0">o</tspan><tspan class="cls-12" x="24.46" y="0">r</tspan><tspan x="30.17" y="0">e sample </tspan><tspan class="cls-9" x="101.14" y="0">t</tspan><tspan class="cls-10" x="106.99" y="0">e</tspan><tspan class="cls-11" x="115.95" y="0">x</tspan><tspan class="cls-13" x="124.52" y="0">t</tspan></text>
+    <g>
+      <line class="cls-7" x1="238.43" y1="134.09" x2="304.03" y2="107.74"/>
+      <polygon class="cls-8" points="304.53 112.91 310.69 105.06 300.82 103.66 304.53 112.91"/>
+    </g>
+    <g>
+      <line class="cls-7" x1="156.98" y1="151.69" x2="121.99" y2="186.18"/>
+      <polygon class="cls-8" points="119.53 181.6 116.87 191.21 126.52 188.7 119.53 181.6"/>
+    </g>
+    <text class="cls-9" transform="translate(97.44 142.81)"><tspan class="cls-10">S</tspan><tspan x="8.98" y="0">ome sample </tspan><tspan class="cls-11" x="104.85" y="0">t</tspan><tspan class="cls-12" x="110.7" y="0">e</tspan><tspan class="cls-13" x="119.66" y="0">x</tspan><tspan x="128.23" y="0">t</tspan></text>
+    <text class="cls-9" transform="translate(221.3 171.45)"><tspan class="cls-10">M</tspan><tspan x="14.58" y="0">o</tspan><tspan class="cls-14" x="24.46" y="0">r</tspan><tspan x="30.17" y="0">e sample </tspan><tspan class="cls-11" x="101.14" y="0">t</tspan><tspan class="cls-12" x="106.99" y="0">e</tspan><tspan class="cls-13" x="115.95" y="0">x</tspan><tspan class="cls-15" x="124.52" y="0">t</tspan></text>
   </g>
 </svg>
