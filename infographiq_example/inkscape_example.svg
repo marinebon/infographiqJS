@@ -34,15 +34,15 @@
      guidetolerance="10"
      inkscape:pageopacity="0"
      inkscape:pageshadow="2"
-     inkscape:window-width="2560"
+     inkscape:window-width="2940"
      inkscape:window-height="1347"
      id="namedview1153"
      showgrid="false"
      inkscape:zoom="2.49"
-     inkscape:cx="170.47937"
-     inkscape:cy="148.77465"
-     inkscape:window-x="34"
-     inkscape:window-y="23"
+     inkscape:cx="320.10817"
+     inkscape:cy="229.09594"
+     inkscape:window-x="9"
+     inkscape:window-y="273"
      inkscape:window-maximized="0"
      inkscape:current-layer="text"
      inkscape:document-rotation="0" />
@@ -267,73 +267,77 @@
   </g>
   <g
      inkscape:groupmode="layer"
-     id="chartexample5"
-     inkscape:label="chartexample5"
-     style="display:inline">
-    <ellipse
-       style="opacity:1;fill:#edf600;fill-opacity:1;stroke:#000000;stroke-width:1;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-       id="path2200"
-       cx="181.5"
-       cy="236.25"
-       rx="53.418098"
-       ry="47.668098" />
-  </g>
-  <g
-     inkscape:groupmode="layer"
-     id="chartexample4"
-     inkscape:label="chartexample4"
-     style="display:inline">
-    <ellipse
-       style="fill:#a50000;fill-opacity:1;stroke:#000000;stroke-width:1;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-       id="path2159"
-       cx="158.82515"
-       cy="57.889542"
-       rx="57.823578"
-       ry="48.069294" />
-  </g>
-  <g
-     inkscape:groupmode="layer"
-     id="chartexample3"
-     inkscape:label="chartexample3"
-     style="display:inline">
-    <rect
-       style="display:inline;opacity:1;fill:#0000ac;fill-opacity:1;stroke:#000000;stroke-width:1;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-       id="rect2187"
-       width="90.649994"
-       height="77.099991"
-       x="255.84"
-       y="15.049999" />
-  </g>
-  <g
-     inkscape:groupmode="layer"
-     id="chartexample2"
-     inkscape:label="chartexample2">
-    <rect
-       style="display:inline;opacity:1;fill:#00ac12;fill-opacity:1;stroke:#000000;stroke-width:1;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-       id="rect2013"
-       width="90.649994"
-       height="77.099991"
-       x="21.158064"
-       y="120.14992" />
-  </g>
-  <g
-     inkscape:groupmode="layer"
-     id="chartexample1"
-     inkscape:label="chartexample1"
-     style="display:inline">
-    <ellipse
-       style="opacity:1;fill:#c600f6;fill-opacity:1;stroke:#000000;stroke-width:1;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-       id="ellipse2009"
-       cx="311.82388"
-       cy="232.78789"
-       rx="53.418098"
-       ry="47.668098" />
+     id="layer3"
+     inkscape:label="icons">
+    <g
+       inkscape:groupmode="layer"
+       id="chartexample5"
+       inkscape:label="chartexample5"
+       style="display:inline">
+      <ellipse
+         style="opacity:1;fill:#edf600;fill-opacity:1;stroke:#000000;stroke-width:1;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         id="path2200"
+         cx="181.5"
+         cy="236.25"
+         rx="53.418098"
+         ry="47.668098" />
+    </g>
+    <g
+       inkscape:groupmode="layer"
+       id="chartexample4"
+       inkscape:label="chartexample4"
+       style="display:inline">
+      <ellipse
+         style="fill:#a50000;fill-opacity:1;stroke:#000000;stroke-width:1;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         id="path2159"
+         cx="158.82515"
+         cy="57.889542"
+         rx="57.823578"
+         ry="48.069294" />
+    </g>
+    <g
+       inkscape:groupmode="layer"
+       id="chartexample3"
+       inkscape:label="chartexample3"
+       style="display:inline">
+      <rect
+         style="display:inline;opacity:1;fill:#0000ac;fill-opacity:1;stroke:#000000;stroke-width:1;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         id="rect2187"
+         width="90.649994"
+         height="77.099991"
+         x="255.84"
+         y="15.049999" />
+    </g>
+    <g
+       inkscape:groupmode="layer"
+       id="chartexample2"
+       inkscape:label="chartexample2">
+      <rect
+         style="display:inline;opacity:1;fill:#00ac12;fill-opacity:1;stroke:#000000;stroke-width:1;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         id="rect2013"
+         width="90.649994"
+         height="77.099991"
+         x="21.158064"
+         y="120.14992" />
+    </g>
+    <g
+       inkscape:groupmode="layer"
+       id="chartexample1"
+       inkscape:label="chartexample1"
+       style="display:inline">
+      <ellipse
+         style="opacity:1;fill:#c600f6;fill-opacity:1;stroke:#000000;stroke-width:1;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         id="ellipse2009"
+         cx="311.82388"
+         cy="232.78789"
+         rx="53.418098"
+         ry="47.668098" />
+    </g>
   </g>
   <g
      inkscape:groupmode="layer"
      id="text"
-     inkscape:label="text"
-     style="display:inline">
+     inkscape:label="text">
     <text
        xml:space="preserve"
        style="font-size:40px;line-height:1.25;font-family:sans-serif;text-align:center;text-anchor:middle;display:inline"
