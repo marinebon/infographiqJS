@@ -10,7 +10,7 @@ To see the latest functionality, please try the:
 
 ## Simple Example
 
-Here is a simple inforgraphic example, showing both Illustrator and Inkscape, to walk through in the instructions:
+Here is a simple infographic example, showing both Illustrator and Inkscape versions of the illustration, to walk through in the instructions:
 
 - [**simple example**](infographiq_example/infographic.html)
 - [**download simple example**](./infographiq_example.zip)
