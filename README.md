@@ -1,27 +1,29 @@
-## InfographiqJS
+# InfographiqJS
 
-Infographiq, ie intelligent interactive infographics, core JavaScript library. For a full tutorial on the Infographiq method, [click here](https://marinebon.org/infographiq/).
+The core JavaScript library for Infographiq, an approach for intelligent interactive infographics. For a full tutorial on the Infographiq method, [click here](https://marinebon.org/infographiq/).
 
-## Demonstration
+## Part 1: Art + Data
+
+### Demonstration
 
 To see the latest functionality, please try the:
 
 - [**demo**](./demo.html)
 
-## Simple Example
+### Simple Example
 
 Here is a simple infographic example, showing both Illustrator and Inkscape versions of the illustration, to walk through in the instructions:
 
 - [**simple example**](infographiq_example/infographic.html)
 - [**download simple example**](./infographiq_example.zip)
 
-## Changes
+### Changes
 
 To see the latest changes, check out the:
 
 - [NEWS](./NEWS.html)
 
-## Usage
+### Usage
 
 This repository _**infographiqJS**_ contains the core JavaScript component of "_infographiq_", ie intelligent interactive infographics, tying together the **Art** icons with a **Table** to find the **Modal** when clicked:
 
@@ -102,6 +104,51 @@ Parameters for the `link_svg()` JavaScript function:
   - `text_toggle = false`
   - `svg_filter`: value to filter the optional column `svg` by rows in the link table `csv` for subsetting the icons to link; default is NULL with all rows in the link table being used. 
 
+## Part 2: Responsive Tables
+
+### Demonstration
+
+In [this demonstration table](https://marinebon.org/infographiqJS/table_modalv1.html), click on any row to see the associated figure.
+
+### HTML
+
+Here is an example of the raw HTML to paste into a page for rendering:
+
+``` html
+<h1>Table</h1>
+<table id="example" class = "display" width="100%" style = "cursor: pointer;"></table>
+<div id="modal1" class="modal" >
+  <div class="modal-content animate" >
+    <div class = "container">
+      <h3 style = "text-align: center;"><span id="title"></span></h3>
+      <div id="img_target" ></div>
+      <span id="caption"></span>
+      <span id="datalink"></span>
+      <span id="methodslink"></span>
+    </div>
+    <div class="container" >
+      <button type="button"  onclick="document.getElementById('modal1').style.display='none'" class="closebtn">CLOSE</button>
+    </div>
+  </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script src="https://d3js.org/d3.v6.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
+<link rel="stylesheet" href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.0/css/all.min.css">
+<script src='https://marinebon.org/infographiqJS/libs/infographiq_latest/infographiq.js'></script>
+<link rel="stylesheet" href="https://marinebon.org/infographiqJS/libs/infographiq_latest/infographiq_table.css"> 
+<script>
+    var csvLink1 = "https://docs.google.com/spreadsheets/d/e/2PACX-1vS3WnWFSuZA3I6d16n9bJo33cd_3mL6_XVIf1CRbKzJM6NvLKs6B39-m6jfRfZyFr2lxGQ7dcN0MWxl/pub?gid=0&single=true&output=csv";
+    link_table(csvLink1);
+</script>
+```
+### link_table()
+
+Parameters for the `link_table()` JavaScript function:
+- Required parameters
+  - `csvLink`: string data type. URL of data (saved in csv format) to be displayed as a responsive table. Please see the [full Infographiq tutorial](https://marinebon.org/infographiq/responsive-data-tables.html) for more information. 
 
 ## Contributing
 
