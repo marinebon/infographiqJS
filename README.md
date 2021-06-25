@@ -100,7 +100,7 @@ Parameters for the `link_svg()` JavaScript function:
   - `colored_sections = false`
   - `section_colors = ['LightGreen', 'MediumOrchid', 'Orange']`
   - `text_toggle = false`
-  - `svg_filter`: value to filter the optional column `svg` by rows in the table `csv` for subsetting the icons to link; default is NULL so all rows are used table. 
+  - `svg_filter`: value to filter the optional column `svg` by rows in the link table `csv` for subsetting the icons to link; default is NULL with all rows in the link table being used. 
 
 
 ## Contributing
