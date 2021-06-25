@@ -12,7 +12,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
     <script src="https://d3js.org/d3.v5.min.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://marinebon.org/infographiqJS/libs/infographiq_latest/infographiq.css"> 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" integrity="sha512-5A8nwdMOWrSz20fDsjczgUidUBR8liPYU+WymTZP1lmY9G6Oc7HlZv156XqnsgNUzTyMefFTcsFH/tnJE/+xBg==" crossorigin="anonymous" />
 	</head>
 	<body>
     <!-- define bootstrap layout that will contain the infographic -->
@@ -29,13 +29,14 @@
 
   <!-- run infographiq function to link the svg with the svg_list -->
   <script src='https://marinebon.org/infographiqJS/libs/infographiq_latest/infographiq.js'></script>  
+  <link rel="stylesheet" href="https://marinebon.org/infographiqJS/libs/infographiq_latest/infographiq.css"> 
   <script>
     link_svg({
       svg: "illustrator_example.svg", 
       csv: "icon_link.csv", 
       svg_id: "svg1", 
       toc_id: "toc1",
-      toc_style: "sectioned_list",
+      toc_style: "accordion",
       text_toggle: "toggle_off",
       svg_filter: "illustrator_example.svg"});
   </script>
