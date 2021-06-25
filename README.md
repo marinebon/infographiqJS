@@ -86,7 +86,7 @@ Parameters for the `link_svg()` JavaScript function:
 - Required parameters
   - `svg`: art (background + icons) in scalable vector graphics (*.svg) format.
   - `csv`: table in comma-seperated values (*.csv) format
-  - Optional parameters
+- Optional parameters
   - `svg_id`: identifier of `<div>` tag for replacing with `svg`; default value of 'svg'.
   - `toc_id`: identifier of `<div>` tag for replacing with table of contents (toc) using `csv`; default value of 'toc'.
   - `hover_color = 'yellow', width = '100%'`
