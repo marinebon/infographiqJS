@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>    
-  <title>Basic Line Chart in Google Charts</title>
+<head>
+  <title>Basic Line Chart in Google Charts Using CSV File as Data Source</title>
   <meta charset="utf-8"/>
   <!-- The first thing to do is load the initial Google javascript library for charting -->
   <script src="https://www.gstatic.com/charts/loader.js"></script>
@@ -19,9 +19,12 @@
     //  1. set up the data query in the way that Google needs it (but don't get  the data yet)
     //  2. Send that data query to another function (called handleQueryResponse) that will actually pull the data and create the graph 
     function drawGID() {
-      var Google_Spreadsheet_Link = 
-        'https://docs.google.com/spreadsheets/d/1kb9SPsioe0163b2_xICUp1sOvYGQtBmiLiSkEeW1u-Y/edit?usp=sharing';
-      var query = new google.visualization.Query(Google_Spreadsheet_Link);
+      var queryOptions = {
+        csvColumns: ['number', 'number'], // Or whatever the columns in the CSV file are 
+        csvHasHeader: true // This should be false if your CSV file doesn't have a header
+      }
+      var csv_url = 'modal_google_charts3_data.csv';
+      var query = new google.visualization.Query(csv_url, queryOptions);
       query.send(handleQueryResponse);
     }
 
@@ -37,7 +40,7 @@
           format: '####', // No commas in the X Axis labels
           titleTextStyle: {bold: false, italic: false }}, // Set how the X Axis title looks
       vAxis: {  // options for the Y Axis
-          title: "Humpback Whale Sightings",  // Set the Y Axis title
+          title: "Invasive Species Index",  // Set the Y Axis title
           titleTextStyle: {bold: false, italic: false }, // Set how the Y Axis title looks
           minorGridlines: {color: 'transparent'}} // No minor Y Axis gridlines
       };
@@ -66,11 +69,11 @@
 <body>
   <!-- Identify where the chart should be drawn. -->
   <div>
-    <h3 style="text-align:center;">A Basic Line Chart in Google Charts</h3>
+    <h3 style="text-align:center;">A Basic Line Chart in Google Charts Using a CSV File as Data Source</h3>
     <div id="chart_div"/>
   </div>
     <p>
-    The data behind this Google Chart is contained within <a href = 'https://docs.google.com/spreadsheets/d/1kb9SPsioe0163b2_xICUp1sOvYGQtBmiLiSkEeW1u-Y/edit?usp=sharing' target ="=_parent">this Google Sheet</a>. Here is some sample explanatory text about the chart.
+    The data behind this Google Chart is contained within <a href = 'modal_google_charts3_data.csv' target ="=_parent">this comma-delimited data file</a>. Here is some sample explanatory text about the chart.
 </body>
 
 </html>

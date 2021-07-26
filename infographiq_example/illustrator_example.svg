@@ -1,7 +1,7 @@
-<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="379.06" height="319.29" viewBox="0 0 379.06 319.29">
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="378.06" height="318.29" viewBox="0 0 378.06 318.29">
   <defs>
     <style>
-      .cls-1, .cls-2, .cls-3, .cls-4, .cls-5, .cls-6, .cls-7 {
+      .cls-1, .cls-2, .cls-3, .cls-4, .cls-5, .cls-6, .cls-7, .cls-8 {
         stroke: #231f20;
         stroke-miterlimit: 10;
       }
@@ -11,63 +11,43 @@
       }
 
       .cls-2 {
-        fill: #f7ec27;
+        fill: #d24699;
       }
 
       .cls-3 {
-        fill: #ed1f24;
+        fill: #f7ec27;
       }
 
       .cls-4 {
-        fill: #3c57a7;
+        fill: #ed1f24;
       }
 
       .cls-5 {
-        fill: #5dba47;
+        fill: #3c57a7;
       }
 
       .cls-6 {
-        fill: #a44d9d;
+        fill: #5dba47;
       }
 
       .cls-7 {
+        fill: #a44d9d;
+      }
+
+      .cls-8 {
         fill: none;
       }
 
-      .cls-8, .cls-9 {
+      .cls-10, .cls-9 {
         fill: #231f20;
       }
 
-      .cls-9 {
-        font-size: 18px;
-        font-family: MyriadPro-Regular, Myriad Pro;
-      }
-
       .cls-10 {
-        letter-spacing: 0.01em;
-      }
-
-      .cls-11 {
-        letter-spacing: -0.01em;
-      }
-
-      .cls-12 {
-        letter-spacing: 0em;
-      }
-
-      .cls-13 {
-        letter-spacing: 0.01em;
-      }
-
-      .cls-14 {
-        letter-spacing: -0.01em;
-      }
-
-      .cls-15 {
-        letter-spacing: 0em;
+        font-size: 18px;
+        font-family: ArialMT, Arial;
       }
     </style>
-    <radialGradient id="radial-gradient" cx="189.03" cy="160.23" r="266.27" gradientTransform="translate(0.5 -1.68) scale(1 1.01)" gradientUnits="userSpaceOnUse">
+    <radialGradient id="radial-gradient" cx="189.03" cy="160.23" r="266.27" gradientTransform="translate(0 -2.18) scale(1 1.01)" gradientUnits="userSpaceOnUse">
       <stop offset="0.45" stop-color="#a8a8a8"/>
       <stop offset="0.53" stop-color="#898989"/>
       <stop offset="0.68" stop-color="#4e4e4e"/>
@@ -77,35 +57,38 @@
     </radialGradient>
   </defs>
   <g id="background_elements">
-    <rect class="cls-1" x="0.5" y="0.5" width="378.06" height="318.29"/>
+    <rect class="cls-1" width="378.06" height="318.29"/>
   </g>
   <g id="icons">
+    <g id="chartexample6">
+      <polygon id="shape" class="cls-2" points="346.31 104.94 309.18 91.06 275.68 112.25 278.58 74.41 247.29 51.07 286.21 41.56 300.37 5.95 321.53 37.91 361.57 39.24 335.72 68.5 346.31 104.94"/>
+    </g>
     <g id="chartexample5">
-      <ellipse id="shape" class="cls-2" cx="181.56" cy="236.82" rx="50.1" ry="46.42"/>
+      <ellipse id="shape-2" data-name="shape" class="cls-3" cx="187.02" cy="252.45" rx="50.1" ry="46.42"/>
     </g>
     <g id="chartexample4">
-      <ellipse id="shape-2" data-name="shape" class="cls-3" cx="160.73" cy="59.6" rx="58.48" ry="48.85"/>
+      <ellipse id="shape-3" data-name="shape" class="cls-4" cx="62.66" cy="81.18" rx="58.48" ry="48.85"/>
     </g>
     <g id="chartexample3">
-      <rect id="shape-3" data-name="shape" class="cls-4" x="255.34" y="21.05" width="90.65" height="77.1"/>
+      <rect id="shape-4" data-name="shape" class="cls-5" x="143.71" y="17.32" width="90.65" height="77.1"/>
     </g>
     <g id="chartexample2">
-      <polygon id="shape-4" data-name="shape" class="cls-5" points="109.56 223.31 72.43 209.43 38.92 230.62 41.83 192.78 10.54 169.44 49.46 159.93 63.62 124.32 84.78 156.28 124.82 157.61 98.97 186.87 109.56 223.31"/>
+      <polygon id="shape-5" data-name="shape" class="cls-6" points="104.54 290.48 67.41 276.6 33.91 297.78 36.81 259.95 5.52 236.6 44.44 227.1 58.61 191.49 79.76 223.45 119.8 224.78 93.95 254.04 104.54 290.48"/>
     </g>
     <g id="chartexample1">
-      <polygon id="chartexample1-2" data-name="chartexample1" class="cls-6" points="342.15 254.72 301.53 267.02 270.56 237.99 280.22 196.66 320.85 184.35 351.81 213.39 342.15 254.72"/>
+      <polygon id="shape-6" data-name="shape" class="cls-7" points="341.65 273.58 301.03 285.88 270.06 256.85 279.72 215.51 320.35 203.21 351.31 232.24 341.65 273.58"/>
     </g>
   </g>
   <g id="text">
     <g>
-      <line class="cls-7" x1="238.93" y1="134.59" x2="304.53" y2="108.24"/>
-      <polygon class="cls-8" points="305.03 113.41 311.19 105.56 301.32 104.16 305.03 113.41"/>
+      <line class="cls-8" x1="248.43" y1="134.09" x2="314.03" y2="107.74"/>
+      <polygon class="cls-9" points="314.53 112.91 320.69 105.06 310.82 103.66 314.53 112.91"/>
     </g>
     <g>
-      <line class="cls-7" x1="157.48" y1="152.19" x2="122.49" y2="186.68"/>
-      <polygon class="cls-8" points="120.03 182.1 117.37 191.71 127.02 189.2 120.03 182.1"/>
+      <line class="cls-8" x1="156.98" y1="151.69" x2="121.99" y2="186.18"/>
+      <polygon class="cls-9" points="119.53 181.6 116.87 191.21 126.52 188.7 119.53 181.6"/>
     </g>
-    <text class="cls-9" transform="translate(97.94 143.31)"><tspan class="cls-10">S</tspan><tspan x="8.98" y="0">ome sample </tspan><tspan class="cls-11" x="104.85" y="0">t</tspan><tspan class="cls-12" x="110.7" y="0">e</tspan><tspan class="cls-13" x="119.66" y="0">x</tspan><tspan x="128.23" y="0">t</tspan></text>
-    <text class="cls-9" transform="translate(221.8 171.95)"><tspan class="cls-10">M</tspan><tspan x="14.58" y="0">o</tspan><tspan class="cls-14" x="24.46" y="0">r</tspan><tspan x="30.17" y="0">e sample </tspan><tspan class="cls-11" x="101.14" y="0">t</tspan><tspan class="cls-12" x="106.99" y="0">e</tspan><tspan class="cls-13" x="115.95" y="0">x</tspan><tspan class="cls-15" x="124.52" y="0">t</tspan></text>
+    <text class="cls-10" transform="translate(97.44 142.81)">Some sample text</text>
+    <text class="cls-10" transform="translate(221.3 171.45)">More sample text</text>
   </g>
 </svg>
