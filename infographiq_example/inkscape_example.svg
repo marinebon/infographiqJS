@@ -34,15 +34,15 @@
      guidetolerance="10"
      inkscape:pageopacity="0"
      inkscape:pageshadow="2"
-     inkscape:window-width="2940"
+     inkscape:window-width="2961"
      inkscape:window-height="1347"
      id="namedview1153"
      showgrid="false"
-     inkscape:zoom="2.49"
-     inkscape:cx="320.10817"
-     inkscape:cy="229.09594"
-     inkscape:window-x="9"
-     inkscape:window-y="273"
+     inkscape:zoom="2.8937883"
+     inkscape:cx="283.97838"
+     inkscape:cy="201.45052"
+     inkscape:window-x="-716"
+     inkscape:window-y="717"
      inkscape:window-maximized="0"
      inkscape:current-layer="text"
      inkscape:document-rotation="0" />
@@ -271,6 +271,18 @@
      inkscape:label="icons">
     <g
        inkscape:groupmode="layer"
+       id="chartexample6"
+       inkscape:label="chartexample6">
+      <rect
+         style="display:inline;opacity:1;fill:#fdcd09;fill-opacity:1;stroke:#000000;stroke-width:1;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         id="rect2013-2"
+         width="90.649994"
+         height="77.099991"
+         x="9.7761765"
+         y="227.25052" />
+    </g>
+    <g
+       inkscape:groupmode="layer"
        id="chartexample5"
        inkscape:label="chartexample5"
        style="display:inline">
@@ -311,14 +323,15 @@
     <g
        inkscape:groupmode="layer"
        id="chartexample2"
-       inkscape:label="chartexample2">
+       inkscape:label="chartexample2"
+       style="display:inline">
       <rect
          style="display:inline;opacity:1;fill:#00ac12;fill-opacity:1;stroke:#000000;stroke-width:1;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
          id="rect2013"
          width="90.649994"
          height="77.099991"
-         x="21.158064"
-         y="120.14992" />
+         x="7.4550242"
+         y="74.636253" />
     </g>
     <g
        inkscape:groupmode="layer"
