@@ -1,5 +1,7 @@
-/// globally scope the variable that will be used to define the tooltip container in the svg
-var tooltip_div;
+// append div for tooltip
+var tooltip_div = d3.select("body").append("div")
+  .attr("class", "tooltip")
+  .style("opacity", 0);
 
 // append div for modal
 function appendHtml(el, str) {
@@ -10,11 +12,11 @@ function appendHtml(el, str) {
   }
 }
 
-// globally scope the svg elements to be modified when highlighted
 var svg_elements = ["circle", "ellipse", "line", "mesh", "path", "polygon", "polyline", "rect", "text"];
 
-//globally scope the variable that defines the properties of the modal window
-var modal_html = '<div aria-labelledby="modal-title" class="modal fade bs-example-modal-lg" id="modal" role="dialog" tabindex="-1"><div class="modal-dialog modal-lg" role="document"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button><h4 class="modal-title" id="modal-title">title</h4></div><div class="modal-body"><iframe data-src="" allow="fullscreen" height="100%" width="100%" frameborder="0"></iframe></div><div class="modal-footer"><button class="btn btn-default btn-sm" data-dismiss="modal">Close</button></div></div></div></div>';
+var modal_html = '<div aria-labelledby="modal-title" class="modal fade bs-example-modal-lg" id="modal" role="dialog" tabindex="-1"><div class="modal-dialog modal-lg" role="document"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button><h4 class="modal-title" id="modal-title">title</h4></div><div class="modal-body"><iframe data-src="" height="100%" width="100%" frameborder="0"></iframe></div><div class="modal-footer"><button class="btn btn-default btn-sm" data-dismiss="modal">Close</button></div></div></div></div>';
+
+appendHtml(document.body, modal_html); // "body" has two more children - h1 and span.
 
 function basename(path) {
      return path.replace(/.*\//, '');
@@ -26,7 +28,6 @@ function link_svg({svg, csv, svg_id = 'svg', toc_id = 'toc', hover_color = 'yell
   section_colors = ['LightGreen', 'MediumOrchid', 'Orange'], text_toggle = 'none',
   svg_filter} = {}) {
 
-  // basic error checking to see if there are elementary errors in the arguments provided to the function
   if (svg == null | csv == null){
     console.error("ERROR with link_svg function! Values are missing for required parameters in the function: svg, csv");
   }
@@ -39,38 +40,11 @@ function link_svg({svg, csv, svg_id = 'svg', toc_id = 'toc', hover_color = 'yell
     console.error("ERROR with parameter text_toggle in link_svg function! The parameter text_toggle can only have one of the following values: 'none', 'toggle_off', or 'toggle_on'");
   }
 
-  // open up the svg in d3
   d3.xml(svg).then((f) => {
 
-    // Add button for full screen option
-    d3.select("#" + toc_id).append("BUTTON")
-      .text("Make image full screen")
-      .attr("style", "margin-bottom: 5px")
-      .attr("class", "btn btn-primary")
-      .on("click", openFullScreen)
-      .attr("id", "top-button");            
-
-    // Code to activate full screen upon clicking button
-    function openFullScreen(){
-      var elem = document.getElementById(svg_id);
-      if (elem.requestFullscreen) {
-          elem.requestFullscreen();
-      } else if (elem.webkitRequestFullscreen) { /* Safari */
-        elem.webkitRequestFullscreen();
-      }
-    }
-
-    // attach svg into html document
     var div = d3.select('#' + svg_id);
-    var f_child = div.node().appendChild(f.documentElement);
-    
-    // attach modal window into html document, into the svg_id container
-    appendHtml(div.node(), modal_html); 
 
-    // append div for svg tooltip
-    tooltip_div = d3.select('#' + svg_id).append("div")
-      .attr("class", "tooltip")
-      .style("opacity", 0);
+    var f_child = div.node().appendChild(f.documentElement);
 
     // get handle to svg
     var h = d3.select(f_child);
@@ -86,7 +60,7 @@ function link_svg({svg, csv, svg_id = 'svg', toc_id = 'toc', hover_color = 'yell
         d3.select("#" + svg_id).select("#text").attr("display", display);
       }
 
-      d3.select("#" + toc_id).append("div")
+      d3.select("#" + toc_id).append("span")
         .text("Text in image: ")
         .attr("font-weight", "bold")
         .attr("id", toc_id + "Wrapper");
