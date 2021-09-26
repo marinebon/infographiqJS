@@ -330,9 +330,9 @@ function icon_append(d, h, modal_url_pfx, svg_id, hover_color, section_content, 
     tooltip_div.transition()
       .duration(200)
       .style("opacity", 0.8);
-    tooltip_div.html(d.title + "<br/>")
-      .style("left", (d3.event.pageX) + "px")
-      .style("top", (d3.event.pageY - 28) + "px");
+    tooltip_div.html(d.title + "<br/>");
+//      .style("left", (d3.event.pageX) + "px")
+ //     .style("top", (d3.event.pageY - 28) + "px");
   }
 
   function handleMouseOverSansTooltip(){
