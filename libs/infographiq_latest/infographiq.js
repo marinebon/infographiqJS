@@ -87,7 +87,7 @@ function link_svg({svg, csv, svg_id = 'svg', toc_id = 'toc', hover_color = 'yell
       }
 
       d3.select("#" + toc_id).append("div")
-        .text("Text in image: ")
+        .text("Text in image 3: ")
         .attr("font-weight", "bold")
         .attr("id", toc_id + "Wrapper");
 
@@ -331,8 +331,9 @@ function icon_append(d, h, modal_url_pfx, svg_id, hover_color, section_content, 
       .duration(200)
       .style("opacity", 0.8);
     tooltip_div.html(d.title + "<br/>")
-      .style("left", d3.select(this).attr("cx") + "px")
-      .style("top", d3.select(this).attr("cy") + "px");
+      .style("left", (d3.event.pageX) + "px")
+      .style("top", (d3.event.pageY-300) + "px");
+
   }
 
   function handleMouseOverSansTooltip(){
