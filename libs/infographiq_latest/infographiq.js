@@ -325,6 +325,9 @@ function icon_append(d, h, modal_url_pfx, svg_id, hover_color, section_content, 
   }
 
   function handleMouseOver(){
+var tempo = document.getElementById(svg_id);
+cx = tempo.getBoundingClientRect();
+              console.log(cx);
     d3.selectAll("#" + svg_id).selectAll("#" + d.icon).style("opacity", "0");
     d3.selectAll("#" + svg_id).selectAll("#" + d.icon + "_highlight").style("opacity", "100");
     tooltip_div.transition()
