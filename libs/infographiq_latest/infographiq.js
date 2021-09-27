@@ -46,7 +46,7 @@ function link_svg({svg, csv, svg_id = 'svg', toc_id = 'toc', hover_color = 'yell
     d3.select("#" + toc_id).append("BUTTON")
       .text("Make image full screen")
       .attr("style", "margin-bottom: 5px")
-      .attr("class", "btn btn-primary")
+      .attr("class", "btn btn-info")
       .on("click", openFullScreen)
       .attr("id", "top-button");            
 
