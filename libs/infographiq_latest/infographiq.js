@@ -87,7 +87,7 @@ function link_svg({svg, csv, svg_id = 'svg', toc_id = 'toc', hover_color = 'yell
       }
 
       d3.select("#" + toc_id).append("div")
-        .text("Text in image 3: ")
+        .text("Text in image: ")
         .attr("font-weight", "bold")
         .attr("id", toc_id + "Wrapper");
 
