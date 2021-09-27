@@ -325,17 +325,17 @@ function icon_append(d, h, modal_url_pfx, svg_id, hover_color, section_content, 
   }
 
   function handleMouseOver(){
-var tempo = document.getElementById(svg_id);
-cx = tempo.getBoundingClientRect();
-              console.log(cx);
+    // determine x and y position of svg 
+    var svg_position = document.getElementById(svg_id).getBoundingClientRect();
+
     d3.selectAll("#" + svg_id).selectAll("#" + d.icon).style("opacity", "0");
     d3.selectAll("#" + svg_id).selectAll("#" + d.icon + "_highlight").style("opacity", "100");
     tooltip_div.transition()
       .duration(200)
-      .style("opacity", 0.8);
+      .style("opacity", 1.0);
     tooltip_div.html(d.title + "<br/>")
-      .style("left", (d3.event.pageX) + "px")
-      .style("top", (d3.event.pageY-300) + "px");
+      .style("left", (d3.event.pageX - svg_position.x) + "px")
+      .style("top", (d3.event.pageY - svg_position.y + 28) + "px");
 
   }
 
