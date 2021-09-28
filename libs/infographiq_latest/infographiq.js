@@ -23,7 +23,7 @@ function basename(path) {
 // main function to link svg elements to modal popups with data in csv
 function link_svg({svg, csv, svg_id = 'svg', toc_id = 'toc', hover_color = 'yellow', width = '100%', 
   height = '100%', modal_url_pfx, toc_style = "list", colored_sections = false,
-  section_colors = ['LightGreen', 'MediumOrchid', 'Orange'], text_toggle = 'none', drupal = false,
+  section_colors = ['LightGreen', 'MediumOrchid', 'Orange'], text_toggle = 'none',
   svg_filter} = {}) {
 
   // basic error checking to see if there are elementary errors in the arguments provided to the function
@@ -329,9 +329,7 @@ function icon_append(d, h, modal_url_pfx, svg_id, hover_color, section_content, 
     var svg_position = document.getElementById(svg_id).getBoundingClientRect();
     console.log(svg_position);
 
-    var drupal ==true;
-    var y_offset = 28;
-    if (drupal == true){y_offset = -200;}
+    var y_offset = -200;
 
     d3.selectAll("#" + svg_id).selectAll("#" + d.icon).style("opacity", "0");
     d3.selectAll("#" + svg_id).selectAll("#" + d.icon + "_highlight").style("opacity", "100");
