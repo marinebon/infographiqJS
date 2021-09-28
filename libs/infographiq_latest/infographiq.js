@@ -362,7 +362,7 @@ function icon_append(d, h, modal_url_pfx, svg_id, hover_color, section_content, 
 
   h.select('#' + d.icon)
     .on("click", handleClick)
-    .on('mouseover', handleMouseOver(drupal))
+    .on('mouseover', handleMouseOver)
     .on('mouseout', handleMouseOut);
 
   // set outline of paths within group to null
