@@ -324,13 +324,13 @@ function icon_append(d, h, modal_url_pfx, svg_id, hover_color, section_content, 
     }
   }
 
-  function handleMouseOver(drupal){
+  function handleMouseOver(drupal1){
     // determine x and y position of svg 
     var svg_position = document.getElementById(svg_id).getBoundingClientRect();
     console.log(svg_position);
 
     var y_offset = 28;
-    if (drupal == true){y_offset = -200;}
+    if (drupal1 == true){y_offset = -200;}
 
     d3.selectAll("#" + svg_id).selectAll("#" + d.icon).style("opacity", "0");
     d3.selectAll("#" + svg_id).selectAll("#" + d.icon + "_highlight").style("opacity", "100");
