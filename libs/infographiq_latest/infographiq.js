@@ -324,7 +324,7 @@ function icon_append(d, h, modal_url_pfx, svg_id, hover_color, section_content, 
     }
   }
 
-  function handleMouseOver(){
+  function handleMouseOver(drupal){
     // determine x and y position of svg 
     var svg_position = document.getElementById(svg_id).getBoundingClientRect();
     console.log(svg_position);
@@ -361,7 +361,7 @@ function icon_append(d, h, modal_url_pfx, svg_id, hover_color, section_content, 
 
   h.select('#' + d.icon)
     .on("click", handleClick)
-    .on('mouseover', handleMouseOver)
+    .on('mouseover', handleMouseOver(drupal))
     .on('mouseout', handleMouseOut);
 
   // set outline of paths within group to null
