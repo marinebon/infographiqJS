@@ -115,3 +115,9 @@ see https://github.com/noaa-iea/fk-esr-info/issues/25#issuecomment-837090518 */
 .modal {
   z-index: 100001 !important;
 }
+
+#svg1:-webkit-full-screen {
+  width: 100%;
+  height: 100%;
+}
+
