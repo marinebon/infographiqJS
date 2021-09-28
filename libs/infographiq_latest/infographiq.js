@@ -23,7 +23,7 @@ function basename(path) {
 // main function to link svg elements to modal popups with data in csv
 function link_svg({svg, csv, svg_id = 'svg', toc_id = 'toc', hover_color = 'yellow', width = '100%', 
   height = '100%', modal_url_pfx, toc_style = "list", colored_sections = false,
-  section_colors = ['LightGreen', 'MediumOrchid', 'Orange'], text_toggle = 'none',
+  section_colors = ['LightGreen', 'MediumOrchid', 'Orange'], text_toggle = 'none', drupal = false,
   svg_filter} = {}) {
 
   // basic error checking to see if there are elementary errors in the arguments provided to the function
@@ -328,6 +328,10 @@ function icon_append(d, h, modal_url_pfx, svg_id, hover_color, section_content, 
     // determine x and y position of svg 
     var svg_position = document.getElementById(svg_id).getBoundingClientRect();
     console.log(svg_position);
+
+    var y_offset = 28;
+    if (drupal == true){y_offset = -200;}
+
     d3.selectAll("#" + svg_id).selectAll("#" + d.icon).style("opacity", "0");
     d3.selectAll("#" + svg_id).selectAll("#" + d.icon + "_highlight").style("opacity", "100");
     tooltip_div.transition()
@@ -335,7 +339,7 @@ function icon_append(d, h, modal_url_pfx, svg_id, hover_color, section_content, 
       .style("opacity", 1.0);
     tooltip_div.html(d.title + "<br/>")
       .style("left", (d3.event.pageX - svg_position.x) + "px")
-      .style("top", (d3.event.pageY - svg_position.y + 28) + "px");
+      .style("top", (d3.event.pageY - svg_position.y + y_offset) + "px");
 
   }
 
