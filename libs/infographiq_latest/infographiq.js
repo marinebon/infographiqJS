@@ -42,26 +42,25 @@ function link_svg({svg, csv, svg_id = 'svg', toc_id = 'toc', hover_color = 'yell
   // open up the svg in d3
   d3.xml(svg).then((f) => {
 
-    var fullscreen = false;
-    if ( document.fullscreenEnabled || document.webkitFullscreenEnabled){ fullscreen = true;}
+    //check to see if full screen is possible on this browser - if so create full screen option for svg
+    if ( document.fullscreenEnabled || document.webkitFullscreenEnabled){ 
 
-console.error("Fullscreen: " + fullscreen);
+      // Add button for full screen option
+      d3.select("#" + toc_id).append("BUTTON")
+        .text("Make image full screen")
+        .attr("style", "margin-bottom: 5px")
+        .attr("class", "btn btn-info")
+        .on("click", openFullScreen)
+        .attr("id", "top-button");            
 
-    // Add button for full screen option
-    d3.select("#" + toc_id).append("BUTTON")
-      .text("Make image full screen")
-      .attr("style", "margin-bottom: 5px")
-      .attr("class", "btn btn-info")
-      .on("click", openFullScreen)
-      .attr("id", "top-button");            
-
-    // Code to activate full screen upon clicking button
-    function openFullScreen(){
-      var elem = document.getElementById(svg_id);
-      if (elem.requestFullscreen) {
-          elem.requestFullscreen();
-      } else if (elem.webkitRequestFullscreen) { /* Safari */
-        elem.webkitRequestFullscreen();
+      // Code to activate full screen upon clicking button
+      function openFullScreen(){
+        var elem = document.getElementById(svg_id);
+        if (elem.requestFullscreen) {
+            elem.requestFullscreen();
+        } else if (elem.webkitRequestFullscreen) { /* Safari */
+          elem.webkitRequestFullscreen();
+        }
       }
     }
 
