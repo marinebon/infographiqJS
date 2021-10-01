@@ -42,7 +42,8 @@ function link_svg({svg, csv, svg_id = 'svg', toc_id = 'toc', hover_color = 'yell
   // open up the svg in d3
   d3.xml(svg).then((f) => {
 
-console.log(document.fullscreenEnabled);
+console.error("Document: " + document.fullscreenEnabled);
+console.error("Webkit: " + document.webkitFullscreenEnabled);
 
     // Add button for full screen option
     d3.select("#" + toc_id).append("BUTTON")
