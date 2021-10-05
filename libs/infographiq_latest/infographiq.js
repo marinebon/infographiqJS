@@ -1,5 +1,22 @@
-/// globally scope the variable that will be used to define the tooltip container in the svg
+// globally scope the variable that will be used to define the tooltip container in the svg
 var tooltip_div;
+
+// globally scope the variable that is used to keep track if full screen mode has been enabled in Safari.
+var webkitFullScreen = false; 
+
+// globally scope the variable that is used to keep track of the svg div (needed only for exiting Safari full screen)
+var webkitSVG;
+
+// If this is Safari, when full screen mode has been enabled, the height and width of the svg element have to be 
+// resized by this javascript to actually be full screen. When full screen mode is disabled in Safari, we need to 
+// reset the height and width of the svg element back to the original size.
+$(document).on('keyup', function(e) {
+  if (e.key == "Escape" && webkitFullScreen == true) {
+       var webkitElem = document.getElementById(webkitSVG);
+        webkitElem.style.width = "100%"; 
+        webkitElem.style.height = "100%"; 
+  }
+});
 
 // append div for modal
 function appendHtml(el, str) {
@@ -47,7 +64,7 @@ function link_svg({svg, csv, svg_id = 'svg', toc_id = 'toc', hover_color = 'yell
 
       // Add button for full screen option
       d3.select("#" + toc_id).append("BUTTON")
-        .text("Make image full screen 5")
+        .text("Make image full screen 6")
         .attr("style", "margin-bottom: 5px")
         .attr("class", "btn btn-info")
         .on("click", openFullScreen)
@@ -59,17 +76,18 @@ function link_svg({svg, csv, svg_id = 'svg', toc_id = 'toc', hover_color = 'yell
         if (elem.requestFullscreen) {
             elem.requestFullscreen();
         } else if (elem.webkitRequestFullscreen) { /* Safari */
+          webkitFullScreen = true;
+          webkitSVG = svg_id;
                               elem.webkitRequestFullscreen();
                     var newWidth = (window.innerWidth) + 'px' ;
                     var newHeight = (window.innerHeight) + 'px'; 
-                     elem.style.width = "100%"; 
-           elem.style.height = "100%"; 
+                     elem.style.width = newWidth; 
+           elem.style.height = newHeight; 
 
                     console.log('width: ' + window.innerWidth);
                     console.log('NewWidth: ' + newWidth);
                     console.log('height: ' + window.innerHeight);
                     console.log('NewHeight: ' + newHeight);
-
         }
       }
     }
