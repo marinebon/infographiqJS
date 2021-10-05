@@ -47,7 +47,7 @@ function link_svg({svg, csv, svg_id = 'svg', toc_id = 'toc', hover_color = 'yell
 
       // Add button for full screen option
       d3.select("#" + toc_id).append("BUTTON")
-        .text("Make image full screen 1")
+        .text("Make image full screen 3")
         .attr("style", "margin-bottom: 5px")
         .attr("class", "btn btn-info")
         .on("click", openFullScreen)
@@ -60,15 +60,15 @@ function link_svg({svg, csv, svg_id = 'svg', toc_id = 'toc', hover_color = 'yell
             elem.requestFullscreen();
         } else if (elem.webkitRequestFullscreen) { /* Safari */
                               elem.webkitRequestFullscreen();
-                     elem.style.width = window.innerWidth-200; 
-           elem.style.height = window.innerHeight-200; 
+                    var newWidth = (window.innerWidth - 200) + 'px' ;
+                    var newHeight = (window.innerHeight - 200) + 'px'; 
+                     elem.style.width = newWidth; 
+           elem.style.height = newHeight; 
 
                     console.log('width: ' + window.innerWidth);
+                    console.log('NewWidth: ' + newWidth);
                     console.log('height: ' + window.innerHeight);
-                    var newWidth = elem.clientWidth*.9;
-                    var newHeight = elem.clientHeight*.9;
-
-
+                    console.log('NewHeight: ' + newHeight);
 
         }
       }
