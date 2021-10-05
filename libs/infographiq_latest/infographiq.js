@@ -62,7 +62,7 @@ function link_svg({svg, csv, svg_id = 'svg', toc_id = 'toc', hover_color = 'yell
                     elem.webkitRequestFullscreen();
                     console.log('width: ' + elem.clientWidth);
                     console.log('height: ' + elem.clientHeight);
-                    var newWidth = elem.clientWidth*.;
+                    var newWidth = elem.clientWidth*.9;
                     var newHeight = elem.clientHeight*.9;
            elem.style.width = "1200px" ; 
            elem.style.height = "1000px"; 
