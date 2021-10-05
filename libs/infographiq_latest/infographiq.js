@@ -60,8 +60,8 @@ function link_svg({svg, csv, svg_id = 'svg', toc_id = 'toc', hover_color = 'yell
             elem.requestFullscreen();
         } else if (elem.webkitRequestFullscreen) { /* Safari */
                               elem.webkitRequestFullscreen();
-                    var newWidth = (window.innerWidth - 200) + 'px' ;
-                    var newHeight = (window.innerHeight - 200) + 'px'; 
+                    var newWidth = (window.innerWidth) + 'px' ;
+                    var newHeight = (window.innerHeight) + 'px'; 
                      elem.style.width = newWidth; 
            elem.style.height = newHeight; 
 
