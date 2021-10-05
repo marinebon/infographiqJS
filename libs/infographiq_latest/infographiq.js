@@ -59,7 +59,10 @@ function link_svg({svg, csv, svg_id = 'svg', toc_id = 'toc', hover_color = 'yell
         if (elem.requestFullscreen) {
             elem.requestFullscreen();
         } else if (elem.webkitRequestFullscreen) { /* Safari */
-          elem.webkitRequestFullscreen();
+                    elem.webkitRequestFullscreen();
+           elem.style.width = "100%"; 
+           elem.style.height = "100%"; 
+
         }
       }
     }
