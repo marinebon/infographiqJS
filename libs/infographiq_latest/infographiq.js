@@ -12,6 +12,8 @@ var webkitSVG;
 // reset the height and width of the svg element back to the original size.
 $(document).on('keyup', function(e) {
   if (e.key == "Escape" && webkitFullScreen == true) {
+    webkitFullScreen = false;
+    document.webkitExitFullscreen();
        var webkitElem = document.getElementById(webkitSVG);
         webkitElem.style.width = "100%"; 
         webkitElem.style.height = "100%"; 
@@ -64,7 +66,7 @@ function link_svg({svg, csv, svg_id = 'svg', toc_id = 'toc', hover_color = 'yell
 
       // Add button for full screen option
       d3.select("#" + toc_id).append("BUTTON")
-        .text("Make image full screen 6")
+        .text("Make image full screen 7")
         .attr("style", "margin-bottom: 5px")
         .attr("class", "btn btn-info")
         .on("click", openFullScreen)
