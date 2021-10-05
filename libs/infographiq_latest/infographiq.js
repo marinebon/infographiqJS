@@ -47,7 +47,7 @@ function link_svg({svg, csv, svg_id = 'svg', toc_id = 'toc', hover_color = 'yell
 
       // Add button for full screen option
       d3.select("#" + toc_id).append("BUTTON")
-        .text("Make image full screen 7")
+        .text("Make image full screen 8")
         .attr("style", "margin-bottom: 5px")
         .attr("class", "btn btn-info")
         .on("click", openFullScreen)
@@ -64,8 +64,8 @@ function link_svg({svg, csv, svg_id = 'svg', toc_id = 'toc', hover_color = 'yell
                     console.log('height: ' + elem.clientHeight);
                     var newWidth = elem.clientWidth*.9;
                     var newHeight = elem.clientHeight*.9;
-           elem.style.width = "1200px" ; 
-           elem.style.height = "1000px"; 
+           elem.style.width = window.innerWidth ; 
+           elem.style.height = window.innerHeight; 
 
 
         }
