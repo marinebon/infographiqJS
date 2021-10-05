@@ -10,17 +10,35 @@ var webkitSVG;
 // If this is Safari, when full screen mode has been enabled, the height and width of the svg element have to be 
 // resized by this javascript to actually be full screen. When full screen mode is disabled in Safari, we need to 
 // reset the height and width of the svg element back to the original size.
-$(document).on('keydown', function(e) {
-  if (e.key == "Escape" && webkitFullScreen == true) {
-    webkitFullScreen = false;
-           var webkitElem = document.getElementById(webkitSVG);
+
+//$(document).on('keydown', function(e) {
+//  if (e.key == "Escape" && webkitFullScreen == true) {
+//    webkitFullScreen = false;
+//           var webkitElem = document.getElementById(webkitSVG);
+ //           webkitElem.style.width = "100%"; 
+ //       webkitElem.style.height = "100%"; 
+ //   document.webkitExitFullscreen();
+
+
+//  }
+//});
+
+document.getElementById('svg1').addEventListener('fullscreenchange', (event) => {
+  // document.fullscreenElement will point to the element that
+  // is in fullscreen mode if there is one. If not, the value
+  // of the property is null.
+  if (document.fullscreenElement) {
+    console.log(`Element: entered fullscreen mode.`);
+  } else {
+var webkitElem = document.getElementById('svg1');
+
             webkitElem.style.width = "100%"; 
         webkitElem.style.height = "100%"; 
-    document.webkitExitFullscreen();
 
-
+    console.log('Leaving full-screen mode.');
   }
 });
+
 
 // append div for modal
 function appendHtml(el, str) {
