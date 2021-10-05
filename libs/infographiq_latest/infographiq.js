@@ -27,10 +27,15 @@ document.getElementById('svg1').addEventListener('webkitfullscreenchange', (even
   // document.fullscreenElement will point to the element that
   // is in fullscreen mode if there is one. If not, the value
   // of the property is null.
+  var webkitElem = document.getElementById('svg1');
   if (document.fullscreenElement) {
+                 var newWidth = (window.innerWidth) + 'px' ;
+                    var newHeight = (window.innerHeight) + 'px'; 
+                     webkitElem.style.width = newWidth; 
+           webkitElem.style.height = newHeight; 
     console.log(`Element: entered fullscreen mode.`);
  } else {
-var webkitElem = document.getElementById('svg1');
+
 
             webkitElem.style.width = "100%"; 
         webkitElem.style.height = "100%"; 
@@ -86,7 +91,7 @@ function link_svg({svg, csv, svg_id = 'svg', toc_id = 'toc', hover_color = 'yell
 
       // Add button for full screen option
       d3.select("#" + toc_id).append("BUTTON")
-        .text("Make image full screen 4")
+        .text("Make image full screen 5")
         .attr("style", "margin-bottom: 5px")
         .attr("class", "btn btn-info")
         .on("click", openFullScreen)
