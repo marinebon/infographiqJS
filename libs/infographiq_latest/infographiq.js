@@ -23,13 +23,13 @@ var webkitSVG;
 //  }
 //});
 
-document.getElementById('svg1').addEventListener('fullscreenchange', (event) => {
+document.getElementById('svg1').addEventListener('webkitfullscreenchange', (event) => {
   // document.fullscreenElement will point to the element that
   // is in fullscreen mode if there is one. If not, the value
   // of the property is null.
   if (document.fullscreenElement) {
     console.log(`Element: entered fullscreen mode.`);
-  } else {
+ } else {
 var webkitElem = document.getElementById('svg1');
 
             webkitElem.style.width = "100%"; 
@@ -86,7 +86,7 @@ function link_svg({svg, csv, svg_id = 'svg', toc_id = 'toc', hover_color = 'yell
 
       // Add button for full screen option
       d3.select("#" + toc_id).append("BUTTON")
-        .text("Make image full screen 2")
+        .text("Make image full screen 4")
         .attr("style", "margin-bottom: 5px")
         .attr("class", "btn btn-info")
         .on("click", openFullScreen)
