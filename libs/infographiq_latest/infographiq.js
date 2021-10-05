@@ -48,8 +48,8 @@ function link_svg({svg, csv, svg_id = 'svg', toc_id = 'toc', hover_color = 'yell
       // If this is Safari, when full screen mode has been enabled, the height and width of the svg element have to be 
       // resized by this javascript to actually be full screen. When full screen mode is disabled in Safari, we need to 
       // reset the height and width of the svg element back to the original size.
-      document.getElementById(svg_id).addEventListener('webkitfullscreenchange', (event) => {
-        var webkitElem = document.getElementById(svg_id);
+      var webkitElem = document.getElementById(svg_id);
+      webkitElem.addEventListener('webkitfullscreenchange', (event) => {
         if (document.webkitFullscreenElement) {
           webkitElem.style.width = (window.innerWidth) + 'px' ;
           webkitElem.style.height = (window.innerHeight) + 'px'; 
@@ -347,7 +347,7 @@ function icon_append(d, h, modal_url_pfx, svg_id, hover_color, section_content, 
     // determine x and y position of svg 
     var svg_position = document.getElementById(svg_id).getBoundingClientRect();
     var y_offset = -28;
-    
+
     d3.selectAll("#" + svg_id).selectAll("#" + d.icon).style("opacity", "0");
     d3.selectAll("#" + svg_id).selectAll("#" + d.icon + "_highlight").style("opacity", "100");
     tooltip_div.transition()
