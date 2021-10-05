@@ -10,7 +10,7 @@ var webkitSVG;
 // If this is Safari, when full screen mode has been enabled, the height and width of the svg element have to be 
 // resized by this javascript to actually be full screen. When full screen mode is disabled in Safari, we need to 
 // reset the height and width of the svg element back to the original size.
-$(document).on('keyup', function(e) {
+$(document).on('keypress', function(e) {
   if (e.key == "Escape" && webkitFullScreen == true) {
     webkitFullScreen = false;
            var webkitElem = document.getElementById(webkitSVG);
@@ -68,7 +68,7 @@ function link_svg({svg, csv, svg_id = 'svg', toc_id = 'toc', hover_color = 'yell
 
       // Add button for full screen option
       d3.select("#" + toc_id).append("BUTTON")
-        .text("Make image full screen 8")
+        .text("Make image full screen 9")
         .attr("style", "margin-bottom: 5px")
         .attr("class", "btn btn-info")
         .on("click", openFullScreen)
