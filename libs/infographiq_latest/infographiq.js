@@ -61,7 +61,7 @@ function link_svg({svg, csv, svg_id = 'svg', toc_id = 'toc', hover_color = 'yell
 
       // Add button for full screen option
       d3.select("#" + toc_id).append("BUTTON")
-        .text("Make image full screen 3")
+        .text("Make image full screen")
         .attr("style", "margin-bottom: 5px")
         .attr("class", "btn btn-info")
         .on("click", openFullScreen)
@@ -346,10 +346,8 @@ function icon_append(d, h, modal_url_pfx, svg_id, hover_color, section_content, 
   function handleMouseOver(){
     // determine x and y position of svg 
     var svg_position = document.getElementById(svg_id).getBoundingClientRect();
-     console.log(svg_position);
-      console.log(document.getElementById(svg_id).offsetTop);    
-
     var y_offset = -28;
+    
     d3.selectAll("#" + svg_id).selectAll("#" + d.icon).style("opacity", "0");
     d3.selectAll("#" + svg_id).selectAll("#" + d.icon + "_highlight").style("opacity", "100");
     tooltip_div.transition()
