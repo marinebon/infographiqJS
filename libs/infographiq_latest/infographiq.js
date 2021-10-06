@@ -24,7 +24,7 @@ function basename(path) {
 function link_svg({svg, csv, svg_id = 'svg', toc_id = 'toc', hover_color = 'yellow', width = '100%', 
   height = '100%', modal_url_pfx, toc_style = "list", colored_sections = false,
   section_colors = ['LightGreen', 'MediumOrchid', 'Orange'], text_toggle = 'none',
-  svg_filter} = {}) {
+  svg_filter, full_screen_button = true, button_text = "Full Screen"} = {}) {
 
   // basic error checking to see if there are elementary errors in the arguments provided to the function
   if (svg == null | csv == null){
@@ -42,8 +42,9 @@ function link_svg({svg, csv, svg_id = 'svg', toc_id = 'toc', hover_color = 'yell
   // open up the svg in d3
   d3.xml(svg).then((f) => {
 
-    //check to see if full screen is possible on this browser - if so create full screen option for svg
-    if ( document.fullscreenEnabled || document.webkitFullscreenEnabled){ 
+    // check to see if full screen is possible on this browser, if so create full screen option for svg 
+    // (but only if the function parameter full_screen_button is set to true)
+    if (full_screen_button && (document.fullscreenEnabled || document.webkitFullscreenEnabled)){ 
 
       // If this is Safari, when full screen mode has been enabled, the height and width of the svg element have to be 
       // resized by this javascript to actually be full screen. When full screen mode is disabled in Safari, we need to 
@@ -54,16 +55,17 @@ function link_svg({svg, csv, svg_id = 'svg', toc_id = 'toc', hover_color = 'yell
           webkitElem.style.width = (window.innerWidth) + 'px' ;
           webkitElem.style.height = (window.innerHeight) + 'px'; 
         } else {
-          webkitElem.style.width = "100%"; 
-          webkitElem.style.height = "100%"; 
+          webkitElem.style.width = width; 
+          webkitElem.style.height = height; 
         }
       });
 
       // Add button for full screen option
       d3.select("#" + toc_id).append("BUTTON")
-        .text("Make image full screen")
+        .text(button_text)
         .attr("style", "margin-bottom: 5px")
         .attr("class", "btn btn-info")
+        .attr("class", "fa fa-arrows-alt"); 
         .on("click", openFullScreen)
         .attr("id", "top-button");            
 
@@ -72,7 +74,6 @@ function link_svg({svg, csv, svg_id = 'svg', toc_id = 'toc', hover_color = 'yell
         var elem = document.getElementById(svg_id);
         if (elem.requestFullscreen) {
             elem.requestFullscreen();
-            console.log("height: ");
         } else if (elem.webkitRequestFullscreen) { /* Safari */
             elem.webkitRequestFullscreen();
         }
