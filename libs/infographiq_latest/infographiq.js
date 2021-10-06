@@ -63,8 +63,8 @@ function link_svg({svg, csv, svg_id = 'svg', toc_id = 'toc', hover_color = 'yell
       // Add button for full screen option
       d3.select("#" + toc_id).append("BUTTON")
         .text(" " + button_text)
-        .attr("style", "margin-bottom: 5px")
-        .attr("class", "btn btn-info fa fa-arrows-alt fa-lg")
+        .attr("style", "margin-bottom: 5px; font-size: large;")
+        .attr("class", "btn btn-info fa fa-arrows-alt")
         .on("click", openFullScreen)
         .attr("id", "top-button");            
 
