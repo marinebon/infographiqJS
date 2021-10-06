@@ -128,7 +128,7 @@
       var color_check = d3.select('input[name="colored_section"]:checked').property("value");
       var colored_sections = (color_check != 'none');
       var text_toggle = d3.select('input[name="text_toggle"]:checked').property("value");
-      var full_screen_button = d3.select('input[name="full_screen_button"]:checked').property("value");
+      var full_screen_button = (d3.select('input[name="full_screen_button"]:checked').property("value") == 'true');
       var color_array = [];
 
       if (color_check == "ocean"){
@@ -151,8 +151,8 @@
         hover_color: hover_color,
         colored_sections: colored_sections,
         section_colors: color_array,
-        full_screen_button: full_screen_button,
-        text_toggle: text_toggle});
+        text_toggle: text_toggle,
+        full_screen_button: full_screen_button,});
     }
 
     redrawInfographic();
