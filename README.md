@@ -91,18 +91,21 @@ Parameters for the `link_svg()` JavaScript function:
 - Optional parameters
   - `svg_id`: identifier of `<div>` tag for replacing with `svg`; default value of 'svg'.
   - `toc_id`: identifier of `<div>` tag for replacing with table of contents (toc) using `csv`; default value of 'toc'.
-  - `hover_color = 'yellow', width = '100%'`
-  - `height = '100%'`
-  - `modal_url_pfx` : base filepath of modal window hyperlinks
-  - `toc_style = "list"`: table of contents (toc) style. Options are: 
-    - `"accordion"`: Bootstrap accordion per header
-    - `"list"`: bulleted list
-    - `"sectioned_list"`: bulleted list with headers
-    - `"none"`: skip showing table of contents (toc)
-  - `colored_sections = false`
-  - `section_colors = ['LightGreen', 'MediumOrchid', 'Orange']`
-  - `text_toggle = false`
+  - `hover_color` = 'yellow'
+  - `width` = '100%'
+  - `height` = '100%'
+  - `modal_url_pfx`: base filepath of modal window hyperlinks
+  - `toc_style` = "list"; table of contents (toc) style. Options are: 
+    - "accordion": Bootstrap accordion per header
+    - "list": bulleted list
+    - "sectioned_list": bulleted list with headers
+    - "none": skip showing table of contents (toc)
+  - `colored_sections` = false
+  - `section_colors` = ['LightGreen', 'MediumOrchid', 'Orange']
+  - `text_toggle` = false
   - `svg_filter`: value to filter the optional column `svg` by rows in the link table `csv` for subsetting the icons to link; default is NULL with all rows in the link table being used. 
+  - `full_screen_button` = true
+  - `button_text` = "Full screen"
 
 ## Part 2: Responsive Tables
 
