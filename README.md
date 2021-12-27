@@ -106,6 +106,7 @@ Parameters for the `link_svg()` JavaScript function:
   - `svg_filter`: value to filter the optional column `svg` by rows in the link table `csv` for subsetting the icons to link; default is NULL with all rows in the link table being used. 
   - `full_screen_button` = true
   - `button_text` = "Full screen"
+  - `tooltip` = true
 
 ## Part 2: Responsive Tables
 
