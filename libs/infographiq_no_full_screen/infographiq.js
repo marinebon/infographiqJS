@@ -12,6 +12,9 @@ function appendHtml(el, str) {
   }
 }
 
+// define tooltip variable globally - this is a hacky quick fix, replace with better solution
+var tooltip;
+
 var svg_elements = ["circle", "ellipse", "line", "mesh", "path", "polygon", "polyline", "rect", "text"];
 
 var modal_html = '<div aria-labelledby="modal-title" class="modal fade bs-example-modal-lg" id="modal" role="dialog" tabindex="-1"><div class="modal-dialog modal-lg" role="document"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button><h4 class="modal-title" id="modal-title">title</h4></div><div class="modal-body"><iframe data-src="" height="100%" width="100%" frameborder="0"></iframe></div><div class="modal-footer"><button class="btn btn-default btn-sm" data-dismiss="modal">Close</button></div></div></div></div>';
@@ -26,7 +29,7 @@ function basename(path) {
 function link_svg({svg, csv, svg_id = 'svg', toc_id = 'toc', hover_color = 'yellow', width = '100%', 
   height = '100%', modal_url_pfx, toc_style = "list", colored_sections = false,
   section_colors = ['LightGreen', 'MediumOrchid', 'Orange'], text_toggle = 'none',
-  svg_filter} = {}) {
+  svg_filter, tooltip = true} = {}) {
 
   if (svg == null | csv == null){
     console.error("ERROR with link_svg function! Values are missing for required parameters in the function: svg, csv");
@@ -301,12 +304,14 @@ function icon_append(d, h, modal_url_pfx, svg_id, hover_color, section_content, 
   function handleMouseOver(){
     d3.selectAll("#" + svg_id).selectAll("#" + d.icon).style("opacity", "0");
     d3.selectAll("#" + svg_id).selectAll("#" + d.icon + "_highlight").style("opacity", "100");
-    tooltip_div.transition()
-      .duration(200)
-      .style("opacity", 0.8);
-    tooltip_div.html(d.title + "<br/>")
-      .style("left", (d3.event.pageX) + "px")
-      .style("top", (d3.event.pageY - 28) + "px");
+    if (tooltip == true){
+      tooltip_div.transition()
+        .duration(200)
+        .style("opacity", 0.8);
+      tooltip_div.html(d.title + "<br/>")
+        .style("left", (d3.event.pageX) + "px")
+        .style("top", (d3.event.pageY - 28) + "px");
+    }
   }
 
   function handleMouseOverSansTooltip(){
@@ -319,10 +324,11 @@ function icon_append(d, h, modal_url_pfx, svg_id, hover_color, section_content, 
 
     d3.selectAll("#" + svg_id).selectAll("#" + d.icon).style("opacity", "100");
     d3.selectAll("#" + svg_id).selectAll("#" + d.icon + "_highlight").style("opacity", "0");
-
+    if (tooltip == true){
       tooltip_div.transition()
         .duration(500);
       tooltip_div.style("opacity", 0);
+    }
   }
 
   h.select('#' + d.icon)
