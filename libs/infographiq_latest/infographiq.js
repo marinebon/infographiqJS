@@ -10,6 +10,9 @@ function appendHtml(el, str) {
   }
 }
 
+// define tooltip variable globally - this is a hacky quick fix, replace with better solution
+this.tooltip_internal = true;
+
 // globally scope the svg elements to be modified when highlighted
 var svg_elements = ["circle", "ellipse", "line", "mesh", "path", "polygon", "polyline", "rect", "text"];
 
@@ -24,7 +27,7 @@ function basename(path) {
 function link_svg({svg, csv, svg_id = 'svg', toc_id = 'toc', hover_color = 'yellow', width = '100%', 
   height = '100%', modal_url_pfx, toc_style = "list", colored_sections = false,
   section_colors = ['LightGreen', 'MediumOrchid', 'Orange'], text_toggle = 'none',
-  svg_filter, full_screen_button = true, button_text = "Full Screen"} = {}) {
+  svg_filter, full_screen_button = true, button_text = "Full Screen", tooltip = true} = {}) {
 
   // basic error checking to see if there are elementary errors in the arguments provided to the function
   if (svg == null | csv == null){
@@ -38,6 +41,9 @@ function link_svg({svg, csv, svg_id = 'svg', toc_id = 'toc', hover_color = 'yell
   if (text_toggle != 'none' & text_toggle != 'toggle_off' &  text_toggle != 'toggle_on'){
     console.error("ERROR with parameter text_toggle in link_svg function! The parameter text_toggle can only have one of the following values: 'none', 'toggle_off', or 'toggle_on'");
   }
+
+  // align tooltip_internal with function parameter
+  tooltip_internal = tooltip;
 
   // open up the svg in d3
   d3.xml(svg).then((f) => {
@@ -350,13 +356,14 @@ function icon_append(d, h, modal_url_pfx, svg_id, hover_color, section_content, 
 
     d3.selectAll("#" + svg_id).selectAll("#" + d.icon).style("opacity", "0");
     d3.selectAll("#" + svg_id).selectAll("#" + d.icon + "_highlight").style("opacity", "100");
-    tooltip_div.transition()
-      .duration(200)
-      .style("opacity", 1.0);
-    tooltip_div.html(d.title + "<br/>")
-      .style("left", (d3.event.pageX - svg_position.x) + "px")
-      .style("top", (d3.event.pageY - svg_position.y + y_offset) + "px");
-
+    if (tooltip_internal == true){
+      tooltip_div.transition()
+        .duration(200)
+        .style("opacity", 1.0);
+      tooltip_div.html(d.title + "<br/>")
+        .style("left", (d3.event.pageX - svg_position.x) + "px")
+        .style("top", (d3.event.pageY - svg_position.y + y_offset) + "px");
+    }
   }
 
   function handleMouseOverSansTooltip(){
@@ -369,10 +376,11 @@ function icon_append(d, h, modal_url_pfx, svg_id, hover_color, section_content, 
 
     d3.selectAll("#" + svg_id).selectAll("#" + d.icon).style("opacity", "100");
     d3.selectAll("#" + svg_id).selectAll("#" + d.icon + "_highlight").style("opacity", "0");
-
+    if (tooltip_internal == true){
       tooltip_div.transition()
         .duration(500);
       tooltip_div.style("opacity", 0);
+    }
   }
 
   h.select('#' + d.icon)

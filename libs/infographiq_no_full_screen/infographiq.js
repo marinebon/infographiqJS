@@ -13,7 +13,7 @@ function appendHtml(el, str) {
 }
 
 // define tooltip variable globally - this is a hacky quick fix, replace with better solution
-var tooltip;
+this.tooltip_internal = true;
 
 var svg_elements = ["circle", "ellipse", "line", "mesh", "path", "polygon", "polyline", "rect", "text"];
 
@@ -42,6 +42,8 @@ function link_svg({svg, csv, svg_id = 'svg', toc_id = 'toc', hover_color = 'yell
   if (text_toggle != 'none' & text_toggle != 'toggle_off' &  text_toggle != 'toggle_on'){
     console.error("ERROR with parameter text_toggle in link_svg function! The parameter text_toggle can only have one of the following values: 'none', 'toggle_off', or 'toggle_on'");
   }
+
+  tooltip_internal = tooltip;
 
   d3.xml(svg).then((f) => {
 
@@ -304,7 +306,7 @@ function icon_append(d, h, modal_url_pfx, svg_id, hover_color, section_content, 
   function handleMouseOver(){
     d3.selectAll("#" + svg_id).selectAll("#" + d.icon).style("opacity", "0");
     d3.selectAll("#" + svg_id).selectAll("#" + d.icon + "_highlight").style("opacity", "100");
-    if (tooltip == true){
+    if (tooltip_internal == true){
       tooltip_div.transition()
         .duration(200)
         .style("opacity", 0.8);
@@ -324,7 +326,7 @@ function icon_append(d, h, modal_url_pfx, svg_id, hover_color, section_content, 
 
     d3.selectAll("#" + svg_id).selectAll("#" + d.icon).style("opacity", "100");
     d3.selectAll("#" + svg_id).selectAll("#" + d.icon + "_highlight").style("opacity", "0");
-    if (tooltip == true){
+    if (tooltip_internal == true){
       tooltip_div.transition()
         .duration(500);
       tooltip_div.style("opacity", 0);
