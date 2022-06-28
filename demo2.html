@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Infographic Example 3</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+</head>
+<body>
+
+  <h1>Example 5 of Infographic Functionality</h1>
+
+  <div class="container-fluid">
+    <div class="row" >
+      <div class="col-md-12" style="background-color: LightGray;">
+        <h4 style="text-align: center">Change the Infographic Display</h4>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-2">
+        <p style = "font-weight: bold; text-decoration: underline;">Outline color on infographic:</p>
+        <input type="radio" id="hover_yellow" name="hover" value="yellow" checked>
+        <label for="hover_yellow">Yellow</label>
+        <br>
+        <input type="radio" id="hover_red" name="hover" value="red">
+        <label for="hover_red">Red</label>
+        <br>
+        <input type="radio" id="hover_blue" name="hover" value="blue">
+        <label for="hover_blue">Blue</label>
+        <br>
+        <input type="radio" id="hover_green" name="hover" value="green">
+        <label for="hover_green">Green</label>
+      </div>
+      <div class="col-md-2">
+        <p style = "font-weight: bold; text-decoration: underline;">Text list type:</p>
+        <input type="radio" id="toc_style_accordion" name="toc_style" value="accordion" checked>
+        <label for="toc_style_accordion">Accordion</label>
+        <br>
+        <input type="radio" id="toc_style_list" name="toc_style" value="list">
+        <label for="toc_style_list">List</label>
+        <br>
+        <input type="radio" id="toc_style_sectioned_list" name="toc_style" value="sectioned_list">
+        <label for="toc_style_sectioned_list">Sectioned List</label>
+        <br>
+        <input type="radio" id="toc_style_none" name="toc_style" value="none">
+        <label for="toc_style_none">None</label>
+      </div>
+      <div class="col-md-2">
+        <p style = "font-weight: bold; text-decoration: underline;">Colored section headers:</p>
+        <input type="radio" id="colored_section_false" name="colored_section" value="none" checked>
+        <label for="colored_section_false">None</label>
+        <br>
+        <input type="radio" id="colored_section_default" name="colored_section" value="default">
+        <label for="colored_section_true">Default colors</label>
+        <br>
+        <input type="radio" id="colored_section_ocean" name="colored_section" value="ocean">
+        <label for="colored_section_true">Ocean colors</label>
+        <br>
+        <input type="radio" id="colored_section_summer" name="colored_section" value="summer">
+        <label for="colored_section_true">Summer colors</label>
+      </div>
+      <div class="col-md-2">
+        <p style = "font-weight: bold; text-decoration: underline;">Explanatory text toggle:</p>
+        <input type="radio" id="text_toggle_none" name="text_toggle" value="none" checked>
+        <label for="text_toggle_none">None</label>
+        <br>
+        <input type="radio" id="text_toggle_off" name="text_toggle" value="toggle_off">
+        <label for="text_toggle_off">Toggle off</label>
+        <br>
+        <input type="radio" id="text_toggle_on" name="text_toggle" value="toggle_on">
+        <label for="text_toggle_on">Toggle on</label>
+      </div>
+      <div class="col-md-2">
+        <p></p>
+        <button class="btn btn-primary btn-lg" onclick="redrawInfographic()">Redraw Infographic</button>
+      </div>
+    </div>
+    <div class="row">
+<hr style="height:2px;border-width:0;color:gray;background-color:gray">
+    </div>
+    <div class="row">
+      <div class="col-md-9">
+        <div id = "svg"> </div>
+      </div>
+      <div class="col-md-3">
+        <div id="toc"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- infographiq: css & js dependencies -->
+
+
+
+    <!-- load jquery 3.6 -->
+<script
+  src="https://code.jquery.com/jquery-3.5.1.js"
+  integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
+  crossorigin="anonymous"></script>
+
+<script
+  src="https://code.jquery.com/jquery-2.2.3.js"
+  integrity="sha256-laXWtGydpwqJ8JA+X9x2miwmaiKhn8tVmOVEigRNtP4="
+  crossorigin="anonymous"></script>
+
+  <script
+  src="https://code.jquery.com/jquery-1.12.0.js"
+  integrity="sha256-yFU3rK1y8NfUCd/B4tLapZAy9x0pZCqLZLmFL3AWb7s="
+  crossorigin="anonymous"></script>
+
+  <script
+  src="https://code.jquery.com/jquery-3.5.1.js"
+  integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
+  crossorigin="anonymous"></script>
+
+  <script src="https://code.jquery.com/jquery-1.9.1.min.js" integrity="sha256-wS9gmOZBqsqWxgIVgA8Y9WcQOa7PgSIX+rPA0VL2rbQ=" crossorigin="anonymous"></script>
+
+    <!-- load bootstrap 3.4.1 -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js" 
+      integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" 
+      crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" 
+      integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" 
+      crossorigin="anonymous">
+    <!-- load d3 version 5 -->       
+    <script src="https://d3js.org/d3.v5.min.js"></script>
+    <!-- load font awesome 4.7.0 -->   
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" 
+      integrity="sha512-5A8nwdMOWrSz20fDsjczgUidUBR8liPYU+WymTZP1lmY9G6Oc7HlZv156XqnsgNUzTyMefFTcsFH/tnJE/+xBg==" 
+      crossorigin="anonymous" />
+  <!-- infographiq v1.0 -->
+  <script src="libs/infographiq_drupal/infographiq.js"></script>
+  <link  href="https://marinebon.github.io/infographiqJS/libs/infographiq_latest/infographiq.css" rel="stylesheet" />
+
+  <!-- infographiq: link_svg() -->
+  <script>
+    function redrawInfographic() {
+      d3.select('#svg').html(null);
+      d3.select('#toc').html(null);
+      var hover_color = d3.select('input[name="hover"]:checked').property("value");
+      var toc_style = d3.select('input[name="toc_style"]:checked').property("value");
+      var color_check = d3.select('input[name="colored_section"]:checked').property("value");
+      var colored_sections = (color_check != 'none');
+      var text_toggle = d3.select('input[name="text_toggle"]:checked').property("value");
+      var color_array = [];
+
+      if (color_check == "ocean"){
+        color_array = ["Aqua", "#386FA4", "#59A5D8", "#84D2F6", "#91E5F6"];
+      }
+      else if (color_check == "summer"){
+        color_array = ["LightCoral", "#00b159", "#00aedb", "#f37735", "#ffc425"];
+      }
+      else {
+        color_array = ['LightGreen', 'MediumOrchid', 'Orange'];
+      }
+
+      link_svg({
+        svg: 'demo.svg',
+        csv: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSAROGVpYB58Zkr8P0iwJdTMRPNLZtJ07IyUn-dQ62C2HMuCEScyl8x7urCD7QbRXQYSIJwDn_wku9G/pub?gid=0&single=true&output=csv',
+        svg_id: 'svg',
+        toc_id: 'toc',
+        modal_url_pfx: 'https://noaa-iea.github.io/fk-esr-info/modals/',
+        toc_style: toc_style,
+        hover_color: hover_color,
+        colored_sections: colored_sections,
+        section_colors: color_array,
+        text_toggle: text_toggle});
+    }
+
+    redrawInfographic();
+  </script>
+
+</body>
+</html>
