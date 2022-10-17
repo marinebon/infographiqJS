@@ -1,6 +1,6 @@
 # InfographiqJS
 
-The core JavaScript library for Infographiq, an approach for intelligent interactive infographics. For a full tutorial on the Infographiq method, [click here](https://marinebon.org/infographiq/).
+The core JavaScript library for Infographiq, an approach for intelligent interactive infographics. For a full tutorial on the Infographiq method, [click here](https://marinebon.github.io/infographiq/).
 
 ## Part 1: Art + Data
 
