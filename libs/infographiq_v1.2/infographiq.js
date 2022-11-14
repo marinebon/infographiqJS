@@ -70,8 +70,8 @@ function link_svg({svg, csv, svg_id = 'svg', toc_id = 'toc', hover_color = 'yell
       if (full_screen_button == true) {
         d3.select("#" + toc_id).append("BUTTON")
           .text(" " + button_text)
-          .attr("style", "margin-bottom: 5px; font-size: large; width: 150px;")
-          .attr("class", "btn btn-info fa fa-arrows-alt")
+          .attr("style", "margin-bottom: 5px; font-size: large;")
+          .attr("class", "btn btn-info fa fa-arrows-alt btn-block")
           .on("click", openFullScreen)
           .attr("id", "top-button");            
       }
