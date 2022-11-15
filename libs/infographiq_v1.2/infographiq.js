@@ -228,7 +228,7 @@ function link_svg({svg, csv, svg_id = 'svg', toc_id = 'toc', hover_color = 'yell
           data.forEach(function(d) {
             if (d.section == section_list[i]){
               element_highlight_add(d.icon, svg_id, hover_color);
-              section_content = icon_append(d, h, modal_url_pfx, svg_id, hover_color, section_content);
+              section_content = icon_append(d, h, modal_url_pfx, svg_id, hover_color, section_content, drupal);
             }
           })
         }
@@ -242,7 +242,7 @@ function link_svg({svg, csv, svg_id = 'svg', toc_id = 'toc', hover_color = 'yell
 
         data.forEach(function(d) {
           element_highlight_add(d.icon, svg_id, hover_color);
-          section_content = icon_append(d, h, modal_url_pfx, svg_id, hover_color, section_content, text_column);
+          section_content = icon_append(d, h, modal_url_pfx, svg_id, hover_color, section_content, text_column, drupal);
         })
       } //end: "list" toc_style option
       else if (toc_style === "sectioned_list"){
@@ -263,7 +263,7 @@ function link_svg({svg, csv, svg_id = 'svg', toc_id = 'toc', hover_color = 'yell
           data.forEach(function(d) {
             if (d.section == section_list[i]){
                         element_highlight_add(d.icon, svg_id, hover_color);
-              section_content = icon_append(d, h, modal_url_pfx, svg_id, hover_color, section_content);
+              section_content = icon_append(d, h, modal_url_pfx, svg_id, hover_color, section_content, drupal);
             }
           })
         }
@@ -306,7 +306,7 @@ function element_highlight_add(icon_id, svg_id, hover_color){
 
 
 // This function
-function icon_append(d, h, modal_url_pfx, svg_id, hover_color, section_content, text_column = true){
+function icon_append(d, h, modal_url_pfx, svg_id, hover_color, section_content, text_column = true, drupal){
   
   //identify hyperlink to which icon should connect to
   if(d.link == null){ // no hyperlink given for modal window
