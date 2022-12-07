@@ -27,7 +27,7 @@ function basename(path) {
 function link_svg({svg, csv, svg_id = 'svg', toc_id = 'toc', hover_color = 'yellow', width = '100%', 
   height = '100%', modal_url_pfx, toc_style = "list", colored_sections = false,
   section_colors = ['LightGreen', 'MediumOrchid', 'Orange'], text_toggle = 'none',
-  svg_filter, full_screen_button = true, button_text = "Full Screen", tooltip = true, drupal = false} = {}) {
+  svg_filter, full_screen_button = true, button_text = "Full Screen", tooltip = true} = {}) {
 
   // basic error checking to see if there are elementary errors in the arguments provided to the function
   if (svg == null | csv == null){
@@ -228,7 +228,7 @@ function link_svg({svg, csv, svg_id = 'svg', toc_id = 'toc', hover_color = 'yell
           data.forEach(function(d) {
             if (d.section == section_list[i]){
               element_highlight_add(d.icon, svg_id, hover_color);
-              section_content = icon_append(d, h, modal_url_pfx, svg_id, hover_color, section_content, drupal);
+              section_content = icon_append(d, h, modal_url_pfx, svg_id, hover_color, section_content);
             }
           })
         }
@@ -242,7 +242,7 @@ function link_svg({svg, csv, svg_id = 'svg', toc_id = 'toc', hover_color = 'yell
 
         data.forEach(function(d) {
           element_highlight_add(d.icon, svg_id, hover_color);
-          section_content = icon_append(d, h, modal_url_pfx, svg_id, hover_color, section_content, text_column, drupal);
+          section_content = icon_append(d, h, modal_url_pfx, svg_id, hover_color, section_content, text_column);
         })
       } //end: "list" toc_style option
       else if (toc_style === "sectioned_list"){
@@ -263,7 +263,7 @@ function link_svg({svg, csv, svg_id = 'svg', toc_id = 'toc', hover_color = 'yell
           data.forEach(function(d) {
             if (d.section == section_list[i]){
                         element_highlight_add(d.icon, svg_id, hover_color);
-              section_content = icon_append(d, h, modal_url_pfx, svg_id, hover_color, section_content, drupal);
+              section_content = icon_append(d, h, modal_url_pfx, svg_id, hover_color, section_content);
             }
           })
         }
@@ -306,7 +306,7 @@ function element_highlight_add(icon_id, svg_id, hover_color){
 
 
 // This function
-function icon_append(d, h, modal_url_pfx, svg_id, hover_color, section_content, text_column = true, drupal){
+function icon_append(d, h, modal_url_pfx, svg_id, hover_color, section_content, text_column = true){
   
   //identify hyperlink to which icon should connect to
   if(d.link == null){ // no hyperlink given for modal window
@@ -362,9 +362,6 @@ function icon_append(d, h, modal_url_pfx, svg_id, hover_color, section_content, 
     // determine x and y position of svg 
     var svg_position = document.getElementById(svg_id).getBoundingClientRect();
     var y_offset = -28;
-    if (drupal == true){
-      y_offset = 0;
-    } 
 
     d3.selectAll("#" + svg_id).selectAll("#" + d.icon).style("opacity", "0");
     d3.selectAll("#" + svg_id).selectAll("#" + d.icon + "_highlight").style("opacity", "100");
