@@ -96,8 +96,7 @@ function link_svg({svg, csv, svg_id = 'svg', toc_id = 'toc', hover_color = 'yell
 
     // append div for svg tooltip
     tooltip_div = d3.select('#' + svg_id).append("div")
-      .attr("class", "tooltip")
-      .style("opacity", 0);
+      .attr("class", "tooltip");
 
     // get handle to svg
     var h = d3.select(f_child);
@@ -303,9 +302,7 @@ function element_highlight_add(icon_id, svg_id, hover_color){
   catch {}
 }
 
-
-
-// This function
+// This function attaches event handlers to a clickable icon within the svg 
 function icon_append(d, h, modal_url_pfx, svg_id, hover_color, section_content, text_column = true){
   
   //identify hyperlink to which icon should connect to
@@ -361,21 +358,29 @@ function icon_append(d, h, modal_url_pfx, svg_id, hover_color, section_content, 
   function handleMouseOver(){
     // determine x and y position of svg 
     var svg_position = document.getElementById(svg_id).getBoundingClientRect();
-    var y_offset = -28;
+    var y_offset = 20; //-28;
 
     d3.selectAll("#" + svg_id).selectAll("#" + d.icon).style("opacity", "0");
     d3.selectAll("#" + svg_id).selectAll("#" + d.icon + "_highlight").style("opacity", "100");
     if (tooltip_internal == true){
-      tooltip_div.transition()
-        .duration(200)
-        .style("opacity", 1.0);
       tooltip_div.html(d.title + "<br/>")
         .style("left", (d3.event.pageX - svg_position.x) + "px")
         .style("top", (d3.event.pageY - svg_position.y + y_offset - window.scrollY) + "px")
         .style("background", hover_color)
-        .style("padding", "2px")
-        .style( "border", 0)
-        .style("border-radius", "8px");
+        .style("opacity", 1.0);
+
+    }
+  }
+
+// what do in the event the cursor moves over an icon
+  function handleMouseMove(){
+    // determine x and y position of svg 
+    var svg_position = document.getElementById(svg_id).getBoundingClientRect();
+    var y_offset = 20; //-28;
+
+    if (tooltip_internal == true){
+        tooltip_div.style("left", (d3.event.pageX - svg_position.x) + "px");
+        tooltip_div.style("top", (d3.event.pageY - svg_position.y + y_offset - window.scrollY) + "px");
     }
   }
 
@@ -390,8 +395,6 @@ function icon_append(d, h, modal_url_pfx, svg_id, hover_color, section_content, 
     d3.selectAll("#" + svg_id).selectAll("#" + d.icon).style("opacity", "100");
     d3.selectAll("#" + svg_id).selectAll("#" + d.icon + "_highlight").style("opacity", "0");
     if (tooltip_internal == true){
-      tooltip_div.transition()
-        .duration(500);
       tooltip_div.style("opacity", 0);
     }
   }
@@ -400,7 +403,8 @@ function icon_append(d, h, modal_url_pfx, svg_id, hover_color, section_content, 
   h.select('#' + d.icon)
     .on("click", handleClick)
     .on('mouseover', handleMouseOver)
-    .on('mouseout', handleMouseOut);
+    .on('mouseleave', handleMouseOut)
+    .on('mousemove', handleMouseMove);
 
   // set outline of paths within group to null
   d3.selectAll("#" + svg_id).select('#' + d.icon).selectAll("path")

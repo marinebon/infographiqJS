@@ -3,6 +3,12 @@
 	font-weight: 600;
   font-size: 16px;
   color: black;
+  min-height: 10px;
+  min-width: 100px;
+  padding: 2px;
+  border: 0;
+  border-radius: 8px;
+  opacity: 0;
 }
 
 .caption_text {
