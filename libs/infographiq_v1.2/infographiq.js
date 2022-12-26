@@ -363,12 +363,22 @@ function icon_append(d, h, modal_url_pfx, svg_id, hover_color, section_content, 
     d3.selectAll("#" + svg_id).selectAll("#" + d.icon).style("opacity", "0");
     d3.selectAll("#" + svg_id).selectAll("#" + d.icon + "_highlight").style("opacity", "100");
     if (tooltip_internal == true){
-      tooltip_div.html(d.title + "<br/>")
-        .style("left", (d3.event.pageX - svg_position.x) + "px")
+        tooltip_div.html(d.title + "<br/>")
         .style("top", (d3.event.pageY - svg_position.y + y_offset - window.scrollY) + "px")
         .style("background", hover_color)
         .style("opacity", 1.0);
-
+      let image_right = document.getElementById(svg_id).parentElement.getBoundingClientRect()["right"];
+      if ((d3.event.pageX/image_right) > 0.5){
+      let x_position = image_right - d3.event.pageX;
+        tooltip_div.style("right", (x_position) + "px");
+        tooltip_div.style("text-align", "right");
+        tooltip_div.style("left", "auto");
+      } else {
+        tooltip_div.style("left", (d3.event.pageX - svg_position.x) + "px");
+        tooltip_div.style("right", "auto");
+        tooltip_div.style("text-align", "left");
+        tooltip_div.style("right", "auto");
+      }
     }
   }
 
@@ -379,7 +389,18 @@ function icon_append(d, h, modal_url_pfx, svg_id, hover_color, section_content, 
     var y_offset = 20; //-28;
 
     if (tooltip_internal == true){
+      let image_right = document.getElementById(svg_id).parentElement.getBoundingClientRect()["right"];
+      if ((d3.event.pageX/image_right) > 0.5){
+        let x_position = image_right - d3.event.pageX;
+        tooltip_div.style("right", (x_position) + "px");
+        tooltip_div.style("text-align", "right");
+        tooltip_div.style("left", "auto");
+      } else {
         tooltip_div.style("left", (d3.event.pageX - svg_position.x) + "px");
+        tooltip_div.style("text-align", "left");
+        tooltip_div.style("right", "auto");
+      }
+
         tooltip_div.style("top", (d3.event.pageY - svg_position.y + y_offset - window.scrollY) + "px");
     }
   }
