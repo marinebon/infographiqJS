@@ -367,6 +367,7 @@ function icon_append(d, h, modal_url_pfx, svg_id, hover_color, section_content, 
         .style("top", (d3.event.pageY - svg_position.y + y_offset - window.scrollY) + "px")
         .style("background", hover_color)
         .style("opacity", 1.0);
+        console.log("Icon: " + d.icon +", PageY: " + d3.event.pageY + ", Svg_position.y: " + svg_position.y + ", Y_offset: " + y_offset + ", ScrollY: " + window.scrollY);
       let image_right = document.getElementById(svg_id).parentElement.getBoundingClientRect()["right"];
       if ((d3.event.pageX/image_right) > 0.5){
       let x_position = image_right - d3.event.pageX;
@@ -400,8 +401,8 @@ function icon_append(d, h, modal_url_pfx, svg_id, hover_color, section_content, 
         tooltip_div.style("text-align", "left");
         tooltip_div.style("right", "auto");
       }
-
-        tooltip_div.style("top", (d3.event.pageY - svg_position.y + y_offset - window.scrollY) + "px");
+      tooltip_div.style("top", (d3.event.pageY - svg_position.y + y_offset - window.scrollY) + "px");
+      console.log("Icon: " + d.icon +", PageY: " + d3.event.pageY + ", Svg_position.y: " + svg_position.y + ", Y_offset: " + y_offset + ", ScrollY: " + window.scrollY);
     }
   }
 
