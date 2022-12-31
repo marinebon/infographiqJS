@@ -296,8 +296,8 @@ function element_highlight_add(icon_id, svg_id, hover_color){
         .style("stroke-width", 2)
         .style("stroke", hover_color);
     }
-  d3.selectAll("#" + svg_id).selectAll("#" + p_prime.id).style("animation", "touch-sensitive-highlight 8s infinite");
-   d3.selectAll("#" + svg_id).selectAll("#" + p.id).style("animation", "touch-sensitive-no-highlight 8s infinite");
+  d3.selectAll("#" + svg_id).selectAll("#" + p_prime.id).style("animation", "touch-sensitive-highlight 5s infinite");
+   d3.selectAll("#" + svg_id).selectAll("#" + p.id).style("animation", "touch-sensitive-no-highlight 5s infinite");
   //  d3.selectAll("#" + svg_id).selectAll("#" + p_prime.id).style("opacity", "0");
   }
   catch {}
