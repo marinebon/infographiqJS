@@ -460,28 +460,30 @@ function link_table(csvLink) {
       return arr;
     })
 
-    //pass the loaded data to DataTable. Note that most of the columns are invisible - they are used to generate the modal content only
-    $(document).ready(function() {
-      var table = $('#example').DataTable( {
-            data: dataSet1,
-            columnDefs: [
-              {targets: [2, 3, 4, 5, 6, 9],
-              visible: false,
-              searchable: false}],
-            columns: [
-              { title: 'Ecological Production Unit' },
-              { title: 'Indicator name' },
-              { title: 'indicator_chunk_title' },
-              { title: 'image_url' },
-              { title: 'caption' },
-              { title: 'alt_text' },   
-              { title: 'data_link' },                           
-              { title: 'Year Beginning' },
-              { title: 'Year End' },
-              { title: 'methods_link' }
-            ]
-        } );
-
+    // Pass the loaded data to DataTable. Note that most of the columns are invisible - they are used to generate the modal content only
+    // We need to add a wrapper around jQuery calls, for the sake of Drupal. For more info: https://www.drupal.org/node/756722#using-jquery
+    (function ($) {
+      $(document).ready(function() {
+        var table = $('#example').DataTable( {
+              data: dataSet1,
+              columnDefs: [
+                {targets: [2, 3, 4, 5, 6, 9],
+                visible: false,
+                searchable: false}],
+              columns: [
+                { title: 'Ecological Production Unit' },
+                { title: 'Indicator name' },
+                { title: 'indicator_chunk_title' },
+                { title: 'image_url' },
+                { title: 'caption' },
+                { title: 'alt_text' },   
+                { title: 'data_link' },                           
+                { title: 'Year Beginning' },
+                { title: 'Year End' },
+                { title: 'methods_link' }
+              ]
+          } );
+      }(jQuery));
 
       // When someone clicks on a row, generate the relevant modal window based upon the data mostly in the hidden cells of that row.
       // We need to add a wrapper around jQuery calls, for the sake of Drupal. For more info: https://www.drupal.org/node/756722#using-jquery
