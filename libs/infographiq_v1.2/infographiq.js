@@ -462,7 +462,6 @@ function link_table(csvLink) {
 
     // Pass the loaded data to DataTable. Note that most of the columns are invisible - they are used to generate the modal content only
       $(document).ready(function() {
-        console.log("hello");
         var table = $('#example').DataTable( {
               data: dataSet1,
               columnDefs: [
