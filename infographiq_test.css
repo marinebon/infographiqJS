@@ -1,4 +1,14 @@
 /* infographiq.css */
+@keyframes touch-sensitive-highlight { 
+  0%,100% { opacity: 0 }
+  50% { opacity: 1 }
+}
+
+@keyframes touch-sensitive-no-highlight { 
+  0%,100% { opacity: 1 }
+  50% { opacity: 0 }
+}
+
 .tooltip {
 	font-weight: 600;
   font-size: 16px;

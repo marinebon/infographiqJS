@@ -296,8 +296,9 @@ function element_highlight_add(icon_id, svg_id, hover_color){
         .style("stroke-width", 2)
         .style("stroke", hover_color);
     }
-
-    d3.selectAll("#" + svg_id).selectAll("#" + p_prime.id).style("opacity", "0");
+  d3.selectAll("#" + svg_id).selectAll("#" + p_prime.id).style("animation", "touch-sensitive-highlight 5s infinite");
+   d3.selectAll("#" + svg_id).selectAll("#" + p.id).style("animation", "touch-sensitive-no-highlight 5s infinite");
+  //  d3.selectAll("#" + svg_id).selectAll("#" + p_prime.id).style("opacity", "0");
   }
   catch {}
 }
@@ -407,12 +408,12 @@ function icon_append(d, h, modal_url_pfx, svg_id, hover_color, section_content, 
 // what do in the event a clickable icon is moused over, if there is not supposed to be a tooltip visible
   function handleMouseOverSansTooltip(){
     d3.selectAll("#" + svg_id).selectAll("#" + d.icon).style("opacity", "0");
-    d3.selectAll("#" + svg_id).selectAll("#" + d.icon + "_highlight").style("opacity", "100");
+    d3.selectAll("#" + svg_id).selectAll("#" + d.icon + "_highlight").style("opacity", "1");
   }
 
 // what to do in the event that a clickable icon or table of contents entry is no longer moused over
   function handleMouseOut(){
-    d3.selectAll("#" + svg_id).selectAll("#" + d.icon).style("opacity", "100");
+    d3.selectAll("#" + svg_id).selectAll("#" + d.icon).style("opacity", "1");
     d3.selectAll("#" + svg_id).selectAll("#" + d.icon + "_highlight").style("opacity", "0");
     if (tooltip_internal == true){
       tooltip_div.style("opacity", 0);
@@ -482,51 +483,46 @@ function link_table(csvLink) {
             ]
         } );
 
+      // when someone clicks on a row generate the relevant modal window based upon the data mostly in the hidden cells of that row
+      $('#example tbody').on('click', 'tr', function () {
+        var data = table.row( this ).data();
+        document.getElementById('title').innerHTML = data[1];
+        document.getElementById('caption').innerHTML = data[4];
 
-      // When someone clicks on a row, generate the relevant modal window based upon the data mostly in the hidden cells of that row.
-      // We need to add a wrapper around jQuery calls, for the sake of Drupal. For more info: https://www.drupal.org/node/756722#using-jquery
-      (function ($) {
-        $('#example tbody').on('click', 'tr', function () {
-          var data = table.row( this ).data();
-          document.getElementById('title').innerHTML = data[1];
-          document.getElementById('caption').innerHTML = data[4];
+        // most elements in the modal window are a 1 to 1 copy/paste from the cells in the data table
+        // the image source is different. The image link given in the table is for the github page for 
+        // an image, but we want the raw image on github. The following translates the former to the latter.
+        var img_src = data[3];
+        img_src = "https://raw.githubusercontent.com/" + img_src.split("https://github.com/")[1];
+        img_src = img_src.split("blob/")[0] + img_src.split("blob/")[1];
 
-          // most elements in the modal window are a 1 to 1 copy/paste from the cells in the data table
-          // the image source is different. The image link given in the table is for the github page for 
-          // an image, but we want the raw image on github. The following translates the former to the latter.
-          var img_src = data[3];
-          img_src = "https://raw.githubusercontent.com/" + img_src.split("https://github.com/")[1];
-          img_src = img_src.split("blob/")[0] + img_src.split("blob/")[1];
+        d3.select("#img_target").select("img").remove();
+        d3.select("#img_target").insert("img")
+          .attr("src", img_src)
+          .attr("alt_text", data[5])
+          .attr("style", "max-width:100% ; max-height: auto;");
+        d3.select("#datalink").select("a").remove();
+        d3.select("#datalink").select("i").remove();
+        d3.select("#datalink").append("i")
+          .attr("class", "fas fa-external-link-alt");     
+        d3.select("#datalink").append("a")
+          .attr("href", data[6])
+          .attr("target", "_blank")
+          .html(" Data Source.");
+        d3.select("#methodslink").select("a").remove();
+        d3.select("#methodslink").select("i").remove();
 
-          d3.select("#img_target").select("img").remove();
-          d3.select("#img_target").insert("img")
-            .attr("src", img_src)
-            .attr("alt_text", data[5])
-            .attr("style", "max-width:100% ; max-height: auto;");
-          d3.select("#datalink").select("a").remove();
-          d3.select("#datalink").select("i").remove();
-          d3.select("#datalink").append("i")
-            .attr("class", "fas fa-external-link-alt");     
-          d3.select("#datalink").append("a")
-            .attr("href", data[6])
+        // only add a data methodology link if one is given.
+        if (data[9] != ""){
+          d3.select("#methodslink").append("i")
+            .attr("class", "fas fa-external-link-alt");  
+          d3.select("#methodslink").append("a")
+            .attr("href", data[9])
             .attr("target", "_blank")
-            .html(" Data Source.");
-          d3.select("#methodslink").select("a").remove();
-          d3.select("#methodslink").select("i").remove();
-
-          // only add a data methodology link if one is given.
-          if (data[9] != ""){
-            d3.select("#methodslink").append("i")
-              .attr("class", "fas fa-external-link-alt");  
-            d3.select("#methodslink").append("a")
-              .attr("href", data[9])
-              .attr("target", "_blank")
-              .html(" Graph Methodology.");
-          }
-          document.getElementById('modal1').style.display='block';
-        } );
-      }(jQuery));
-
+            .html(" Graph Methodology.");
+        }
+        document.getElementById('modal1').style.display='block';
+      } );
 
     } );
   });
