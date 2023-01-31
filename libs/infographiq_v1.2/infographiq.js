@@ -461,8 +461,6 @@ function link_table(csvLink) {
     })
 
     // Pass the loaded data to DataTable. Note that most of the columns are invisible - they are used to generate the modal content only
-    // We need to add a wrapper around jQuery calls, for the sake of Drupal. For more info: https://www.drupal.org/node/756722#using-jquery
- //   (function ($) {
       $(document).ready(function() {
         console.log("hello");
         var table = $('#example').DataTable( {
@@ -484,11 +482,10 @@ function link_table(csvLink) {
                 { title: 'methods_link' }
               ]
           } );
-   //   }(jQuery));
 
       // When someone clicks on a row, generate the relevant modal window based upon the data mostly in the hidden cells of that row.
       // We need to add a wrapper around jQuery calls, for the sake of Drupal. For more info: https://www.drupal.org/node/756722#using-jquery
-      (function ($) {
+  //    (function ($) {
         $('#example tbody').on('click', 'tr', function () {
           var data = table.row( this ).data();
           document.getElementById('title').innerHTML = data[1];
@@ -528,7 +525,7 @@ function link_table(csvLink) {
           }
           document.getElementById('modal1').style.display='block';
         } );
-      }(jQuery));
+ //     }(jQuery));
 
 
     } );
