@@ -484,46 +484,51 @@ function link_table(csvLink) {
             ]
         } );
 
-      // when someone clicks on a row generate the relevant modal window based upon the data mostly in the hidden cells of that row
-      $('#example tbody').on('click', 'tr', function () {
-        var data = table.row( this ).data();
-        document.getElementById('title').innerHTML = data[1];
-        document.getElementById('caption').innerHTML = data[4];
 
-        // most elements in the modal window are a 1 to 1 copy/paste from the cells in the data table
-        // the image source is different. The image link given in the table is for the github page for 
-        // an image, but we want the raw image on github. The following translates the former to the latter.
-        var img_src = data[3];
-        img_src = "https://raw.githubusercontent.com/" + img_src.split("https://github.com/")[1];
-        img_src = img_src.split("blob/")[0] + img_src.split("blob/")[1];
+      // When someone clicks on a row, generate the relevant modal window based upon the data mostly in the hidden cells of that row.
+      // We need to add a wrapper around jQuery calls, for the sake of Drupal. For more info: https://www.drupal.org/node/756722#using-jquery
+      (function ($) {
+        $('#example tbody').on('click', 'tr', function () {
+          var data = table.row( this ).data();
+          document.getElementById('title').innerHTML = data[1];
+          document.getElementById('caption').innerHTML = data[4];
 
-        d3.select("#img_target").select("img").remove();
-        d3.select("#img_target").insert("img")
-          .attr("src", img_src)
-          .attr("alt_text", data[5])
-          .attr("style", "max-width:100% ; max-height: auto;");
-        d3.select("#datalink").select("a").remove();
-        d3.select("#datalink").select("i").remove();
-        d3.select("#datalink").append("i")
-          .attr("class", "fas fa-external-link-alt");     
-        d3.select("#datalink").append("a")
-          .attr("href", data[6])
-          .attr("target", "_blank")
-          .html(" Data Source.");
-        d3.select("#methodslink").select("a").remove();
-        d3.select("#methodslink").select("i").remove();
+          // most elements in the modal window are a 1 to 1 copy/paste from the cells in the data table
+          // the image source is different. The image link given in the table is for the github page for 
+          // an image, but we want the raw image on github. The following translates the former to the latter.
+          var img_src = data[3];
+          img_src = "https://raw.githubusercontent.com/" + img_src.split("https://github.com/")[1];
+          img_src = img_src.split("blob/")[0] + img_src.split("blob/")[1];
 
-        // only add a data methodology link if one is given.
-        if (data[9] != ""){
-          d3.select("#methodslink").append("i")
-            .attr("class", "fas fa-external-link-alt");  
-          d3.select("#methodslink").append("a")
-            .attr("href", data[9])
+          d3.select("#img_target").select("img").remove();
+          d3.select("#img_target").insert("img")
+            .attr("src", img_src)
+            .attr("alt_text", data[5])
+            .attr("style", "max-width:100% ; max-height: auto;");
+          d3.select("#datalink").select("a").remove();
+          d3.select("#datalink").select("i").remove();
+          d3.select("#datalink").append("i")
+            .attr("class", "fas fa-external-link-alt");     
+          d3.select("#datalink").append("a")
+            .attr("href", data[6])
             .attr("target", "_blank")
-            .html(" Graph Methodology.");
-        }
-        document.getElementById('modal1').style.display='block';
-      } );
+            .html(" Data Source.");
+          d3.select("#methodslink").select("a").remove();
+          d3.select("#methodslink").select("i").remove();
+
+          // only add a data methodology link if one is given.
+          if (data[9] != ""){
+            d3.select("#methodslink").append("i")
+              .attr("class", "fas fa-external-link-alt");  
+            d3.select("#methodslink").append("a")
+              .attr("href", data[9])
+              .attr("target", "_blank")
+              .html(" Graph Methodology.");
+          }
+          document.getElementById('modal1').style.display='block';
+        } );
+      }(jQuery));
+
 
     } );
   });
