@@ -464,6 +464,7 @@ function link_table(csvLink) {
     // We need to add a wrapper around jQuery calls, for the sake of Drupal. For more info: https://www.drupal.org/node/756722#using-jquery
  //   (function ($) {
       $(document).ready(function() {
+        console.log("hello");
         var table = $('#example').DataTable( {
               data: dataSet1,
               columnDefs: [
