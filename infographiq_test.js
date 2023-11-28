@@ -390,7 +390,8 @@ function icon_append(d, h, modal_url_pfx, svg_id, hover_color, section_content, 
     var y_offset = 20; //-28;
 
     if (tooltip_internal == true){
-      let image_right = document.getElementById(svg_id).parentElement.getBoundingClientRect()["right"];
+      let right = document.getElementById(svg_id).parentElement.getBoundingClientRect()["right"];
+      let image_right = (document.fullscreenElement || document.webkitFullscreenElement)? right + (window.innerWidth / 4) : right;
       if ((d3.event.pageX/image_right) > 0.5){
         let x_position = image_right - d3.event.pageX;
         tooltip_div.style("right", (x_position) + "px");
