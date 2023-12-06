@@ -1,3 +1,9 @@
+//import { icon_append } from './iconAppend.js';
+//const icon_append = require('./iconAppend.js');
+
+//import { link_table } from "./link_table";
+//const link_table = require("./link_table");
+
 // globally scope the variable that will be used to define the tooltip container in the svg
 var tooltip_div;
 
@@ -30,15 +36,15 @@ function link_svg({svg, csv, svg_id = 'svg', toc_id = 'toc', hover_color = 'yell
   svg_filter, full_screen_button = true, button_text = "Full Screen", tooltip = true} = {}) {
 
   // basic error checking to see if there are elementary errors in the arguments provided to the function
-  if (svg == null | csv == null){
+  if (!svg || !csv){
     console.error("ERROR with link_svg function! Values are missing for required parameters in the function: svg, csv");
   }
 
-  if (document.getElementById(svg_id) == null | document.getElementById(toc_id) == null){
+  if (!document.getElementById(svg_id) || !document.getElementById(toc_id)){
     console.error("ERROR with link_svg function! Div tag specified by svg_id or toc_id in the function link_svg does not exist in this html document.");
   }
 
-  if (text_toggle != 'none' & text_toggle != 'toggle_off' &  text_toggle != 'toggle_on'){
+  if (text_toggle != 'none' && text_toggle != 'toggle_off' && text_toggle != 'toggle_on'){
     console.error("ERROR with parameter text_toggle in link_svg function! The parameter text_toggle can only have one of the following values: 'none', 'toggle_off', or 'toggle_on'");
   }
 
@@ -67,7 +73,7 @@ function link_svg({svg, csv, svg_id = 'svg', toc_id = 'toc', hover_color = 'yell
       });
 
       // Add button for full screen option, but only if full_screen_button is toggled to true
-      if (full_screen_button == true) {
+      if (full_screen_button) {
         d3.select("#" + toc_id).append("BUTTON")
           .text(" " + button_text)
           .attr("style", "margin-bottom: 5px; font-size: large;")
@@ -138,40 +144,25 @@ function link_svg({svg, csv, svg_id = 'svg', toc_id = 'toc', hover_color = 'yell
     d3.csv(csv).then(function(data) {
 
       var csv_columns = data.columns;
-      var svg_col = csv_columns.findIndex(element => element == "svg");
+      var svg_col = csv_columns.indexOf("svg");
       if (svg_col > -1){
-        if (svg_filter == null) {
+        if (!svg_filter) {
           console.error("ERROR! Parameter 'svg_filter' in the function link_svg is undefined. The specified csv file contains a column titled 'svg', which requires 'svg_filter' to be defined.");
         }
         else {
-          var data_subset = [];
-          data.forEach(function(d) {
-            if (d.svg == svg_filter){
-              data_subset.push(d);
-            }
-          })
-          if (data_subset.length == 0){
+          data = data.filter(d => d.svg === svg_filter);
+          if (data.length == 0){
             console.error("ERROR! Value given for 'svg_filter' in the function link_svg can't be found in the 'svg' column of the csv file . All rows of csv file displayed.");
-          }
-          else {
-            data = data_subset;
           }
         }
       }
 
       if (toc_style === "accordion" | toc_style === "sectioned_list"){
-        data = data.sort(
-          function(a,b) { return d3.ascending(a.section, b.section) ||  d3.ascending(a.title, b.title) });
-        var section_list = [];
-        data.forEach(function(d) {
-          if (section_list.length == 0 | section_list[section_list.length - 1] != d.section){
-            section_list.push(d.section);
-          }
-        })
+        data = data.sort((a,b) => d3.ascending(a.section, b.section) || d3.ascending(a.title, b.title));
+        var section_list = [...new Set(data.map(d => d.section))];
       }
       else {
-        data = data.sort(
-          function(a,b) { return d3.ascending(a.title, b.title) });
+        data = data.sort((a,b) => d3.ascending(a.title, b.title));
       }
 
       section_color_index = 0;
@@ -184,45 +175,50 @@ function link_svg({svg, csv, svg_id = 'svg', toc_id = 'toc', hover_color = 'yell
             .attr("aria-multiselectable", "true");
 
         for (let i = 0; i < section_list.length; i++) {
+          const panelId = toc_id + "Panel" + i;
+          const panelSubId = toc_id + "PanelSub" + i;
+          const panelTitleId = toc_id + "PanelTitle" + i;
+          const collapseId = toc_id + "collapse" + i;
+          const bodyId = toc_id + "body" + i;
+
           d3.select("#" + toc_id).append("div")
-            .attr("id", toc_id + "Panel" + i)
+            .attr("id", panelId)
             .attr("class", "panel panel-default");
-          d3.select("#" + toc_id + "Panel" + i).append("div")
-            .attr("id", toc_id + "PanelSub" + i)
+          d3.select("#" + panelId).append("div")
+            .attr("id", panelSubId)
             .attr("class", "panel-heading")
             .attr("role", "tab");
           if (colored_sections === true){
-            d3.select("#" + toc_id + "PanelSub" + i).attr("style", "background-color: " + section_colors[section_color_index] +  ";");
+            d3.select("#" + panelSubId).attr("style", "background-color: " + section_colors[section_color_index] +  ";");
             hover_color = section_colors[section_color_index];
             section_color_index++;
-            if (section_colors.length == section_color_index){section_color_index = 0;}
+            if (section_colors.length == section_color_index){
+              section_color_index = 0;
+            }
           }
-          d3.select("#" + toc_id + "PanelSub" + i).append("h4")
+          d3.select("#" + panelSubId).append("h4")
             .text(section_list[i])
-            .attr("id", toc_id + "PanelTitle" + i)
+            .attr("id", panelTitleId)
             .attr("class", "panel-title")
             .attr("data-toggle", "collapse")
-            .attr("data-target", "#" + toc_id + "collapse" + i)
+            .attr("data-target", "#" + collapseId)
             .attr("role", "button")
-            .attr("aria-controls", toc_id + "collapse" + i);
-          d3.select("#" + toc_id + "Panel" + i).append("div")
-              .attr("id", toc_id + "collapse" + i)
+            .attr("aria-controls", collapseId);
+          d3.select("#" + panelId).append("div")
+              .attr("id", collapseId)
               .attr("role", "tabpanel")
               .attr("aria-labelledby", "heading" + i);
-          if (i == 0) {
-            d3.select("#" + toc_id + "PanelTitle" + i).attr("aria-expanded", "true");
-            d3.select("#" + toc_id + "collapse" + i) .attr("class", "panel-collapse collapse in");
-          }
-          else {
-            d3.select("#" + toc_id + "PanelTitle" + i).attr("aria-expanded", "false");
-            d3.select("#" + toc_id + "collapse" + i) .attr("class", "panel-collapse collapse");
-          }
+          
+          var expanded = i === 0;
+          var collapse = (expanded)? "panel-collapse collapse in" : "panel-collapse collapse";
+          d3.select("#" + panelTitleId).attr("aria-expanded", expanded.toString());
+          d3.select("#" + collapseId) .attr("class", collapse);
 
-          d3.select("#" + toc_id + "collapse" + i).append("div")
+          d3.select("#" + collapseId).append("div")
             .attr("class", "panel-body")
-            .attr("id", toc_id + "body" + i);
+            .attr("id", bodyId);
 
-          var section_content = d3.select('#' + toc_id + 'body' + i).append('ul');
+          var section_content = d3.select('#' + bodyId).append('ul');
 
           data.forEach(function(d) {
             if (d.section == section_list[i]){
@@ -236,8 +232,7 @@ function link_svg({svg, csv, svg_id = 'svg', toc_id = 'toc', hover_color = 'yell
 
         var section_content = d3.select('#' + toc_id).append('ul');
 
-        if (toc_style === "list"){text_column = true;}
-        else {text_column = false;}
+        var text_column = toc_style === "list";
 
         data.forEach(function(d) {
           element_highlight_add(d.icon, svg_id, hover_color);
@@ -245,27 +240,21 @@ function link_svg({svg, csv, svg_id = 'svg', toc_id = 'toc', hover_color = 'yell
         })
       } //end: "list" toc_style option
       else if (toc_style === "sectioned_list"){
-        for (let i = 0; i < section_list.length; i++) {
+        section_list.forEach((section, i) => {
           d3.select("#" + toc_id).append("div")
             .attr("class", "section-title")
             .attr("id", toc_id + "Section" + i)
-            .text(section_list[i]);
-          if (colored_sections === true){
-            d3.select("#" + toc_id + "Section" + i).attr("style", "background-color: " + section_colors[section_color_index] +  ";");
-            hover_color = section_colors[section_color_index];
-            section_color_index++;
-            if (section_colors.length == section_color_index){section_color_index = 0;}
-          }
-
+            .text(section)
+            .style("background-color", colored_sections ? `background-color: ${section_colors[section_color_index++]};` : null);
           var section_content = d3.select("#" + toc_id).append('ul');
 
-          data.forEach(function(d) {
-            if (d.section == section_list[i]){
-                        element_highlight_add(d.icon, svg_id, hover_color);
-              section_content = icon_append(d, h, modal_url_pfx, svg_id, hover_color, section_content);
+          data.forEach(d => {
+            if (d.section === section){
+              element_highlight_add(d.icon, svg_id, section_colors[section_color_index-1]);
+              section_content = icon_append(d, h, modal_url_pfx, svg_id, section_colors[section_color_index - 1], section_content);
             }
           })
-        }
+        })
       } //end: "sectioned_list" toc_style option
     }) // end: d3.csv().then({
 
@@ -305,31 +294,12 @@ function element_highlight_add(icon_id, svg_id, hover_color){
 // This function attaches event handlers to a clickable icon within the svg 
 function icon_append(d, h, modal_url_pfx, svg_id, hover_color, section_content, text_column = true){
   
-  //identify hyperlink to which icon should connect to
-  if(d.link == null){ // no hyperlink given for modal window
-    if(modal_url_pfx != null){ // does value exist for modal_url_pfx 
-      if(modal_url_pfx.charAt(modal_url_pfx.length-1) != "/"){ // ensure backslash is last character of variable modal_url_pfx
-        modal_url_pfx = modal_url_pfx + "/";
-      }
-      // add modal_url_pfx to icon name for modal window hyperlink
-      d.link = modal_url_pfx + d.icon + '.html';
-    }
-    else{ // otherwise, icon name is modal window hyperlink
-      d.link = d.icon + '.html';
-    }
+  if (!d.link){
+    d.link = (modal_url_pfx && modal_url_pfx.endsWith('/')) ? modal_url_pfx + d.icon + '.html' : d.icon + '.html';
+  }else if(!d.link.startsWith('http')){
+    d.link = modal_url_pfx + d.link;
   }
-  else{ // hyperlink given for modal window
-    if (d.link.slice(0, 4) != "http"){ //only modify hyperlink if absolute link not given
-      if(modal_url_pfx != null){ // does value exist for modal_url_pfx 
-        if(modal_url_pfx.charAt(modal_url_pfx.length-1) != "/"){ // ensure backslash is last character of variable modal_url_pfx
-          modal_url_pfx = modal_url_pfx + "/";
-        }
-      // add modal_url_pfx to icon name for modal window hyperlink
-        d.link = modal_url_pfx + d.link;
-      }
-    }
-  }
-  d.title = d.title ? d.title : d.icon;  // fall back on id if title not set
+  d.title = d.title || d.icon;  // fall back on id if title not set
 
   // what do in the event an clickable icon or table of contents entry is clicked
   function handleClick(){
@@ -337,7 +307,7 @@ function icon_append(d, h, modal_url_pfx, svg_id, hover_color, section_content, 
       window.location = d.link;
     } else {
 
-      // https://www.drupal.org/node/756722#using-jquery
+      // https://www.drupal.org/node/756722#using-jquery  
       (function ($) {
         $('#modal').find('iframe')
           .prop('src', function(){ return d.link });
@@ -354,7 +324,28 @@ function icon_append(d, h, modal_url_pfx, svg_id, hover_color, section_content, 
     }
   }
 
-// what do in the event an icon is moused over
+  function calculateTooltipPosition(svg_id, tooltip_div, y_offset){  
+    var svg_position = document.getElementById(svg_id).getBoundingClientRect();
+    var right = document.getElementById(svg_id).parentElement.getBoundingClientRect().right;
+    var center = window.innerWidth/4;
+    let image_right = (document.fullscreenElement || document.webkitFullscreenElement)? right + center : right;
+
+    var x_position, textAlign;
+    if ((d3.event.pageX / image_right) > 0.5) {
+      x_position = image_right - d3.event.pageX;
+      textAlign = "right";
+    } else {
+      x_position = d3.event.pageX - svg_position.x;
+      textAlign = "left";
+    }
+
+    tooltip_div.style("left", (textAlign == "left") ?  x_position + "px" : "auto");
+    tooltip_div.style("right", (textAlign == "right") ?  x_position + "px" : "auto");
+    tooltip_div.style("text-align", textAlign);
+    tooltip_div.style("top", (d3.event.pageY - svg_position.y + y_offset - window.scrollY) + "px");
+  }
+
+// what do in the event an icon is moused over (when it first enters the icon)
   function handleMouseOver(){
     // determine x and y position of svg 
     var svg_position = document.getElementById(svg_id).getBoundingClientRect();
@@ -362,46 +353,21 @@ function icon_append(d, h, modal_url_pfx, svg_id, hover_color, section_content, 
 
     d3.selectAll("#" + svg_id).selectAll("#" + d.icon).style("opacity", "0");
     d3.selectAll("#" + svg_id).selectAll("#" + d.icon + "_highlight").style("opacity", "100");
-    if (tooltip_internal == true){
+    if (tooltip_internal){
         tooltip_div.html(d.title + "<br/>")
         .style("top", (d3.event.pageY - svg_position.y + y_offset - window.scrollY) + "px")
         .style("background", hover_color)
         .style("opacity", 1.0);
-      let image_right = document.getElementById(svg_id).parentElement.getBoundingClientRect()["right"];
-      if ((d3.event.pageX/image_right) > 0.5){
-      let x_position = image_right - d3.event.pageX;
-        tooltip_div.style("right", (x_position) + "px");
-        tooltip_div.style("text-align", "right");
-        tooltip_div.style("left", "auto");
-      } else {
-        tooltip_div.style("left", (d3.event.pageX - svg_position.x) + "px");
-        tooltip_div.style("right", "auto");
-        tooltip_div.style("text-align", "left");
-        tooltip_div.style("right", "auto");
-      }
+      calculateTooltipPosition(svg_id, tooltip_div, y_offset);
     }
   }
 
 // what do in the event the cursor moves over an icon
   function handleMouseMove(){
     // determine x and y position of svg 
-    var svg_position = document.getElementById(svg_id).getBoundingClientRect();
     var y_offset = 20; //-28;
-
-    if (tooltip_internal == true){
-      let right = document.getElementById(svg_id).parentElement.getBoundingClientRect()["right"];
-      let image_right = (document.fullscreenElement || document.webkitFullscreenElement)? right + (window.innerWidth / 4) : right;
-      if ((d3.event.pageX/image_right) > 0.5){
-        let x_position = image_right - d3.event.pageX;
-        tooltip_div.style("right", (x_position) + "px");
-        tooltip_div.style("text-align", "right");
-        tooltip_div.style("left", "auto");
-      } else {
-        tooltip_div.style("left", (d3.event.pageX - svg_position.x) + "px");
-        tooltip_div.style("text-align", "left");
-        tooltip_div.style("right", "auto");
-      }
-      tooltip_div.style("top", (d3.event.pageY - svg_position.y + y_offset - window.scrollY) + "px");
+    if (tooltip_internal){
+      calculateTooltipPosition(svg_id, tooltip_div, y_offset)
     }
   }
 
@@ -415,7 +381,7 @@ function icon_append(d, h, modal_url_pfx, svg_id, hover_color, section_content, 
   function handleMouseOut(){
     d3.selectAll("#" + svg_id).selectAll("#" + d.icon).style("opacity", "100");
     d3.selectAll("#" + svg_id).selectAll("#" + d.icon + "_highlight").style("opacity", "0");
-    if (tooltip_internal == true){
+    if (tooltip_internal){
       tooltip_div.style("opacity", 0);
     }
   }
@@ -432,7 +398,7 @@ function icon_append(d, h, modal_url_pfx, svg_id, hover_color, section_content, 
       .style("stroke-width", null)
       .style("stroke", null);
 
-  if (text_column === true){
+  if (text_column){
     // add to bulleted list of svg elements
     list_text = d.title ? d.title : d.icon;  // fall back on id if title not set
     section_content.append("li").append("a")
@@ -445,94 +411,69 @@ function icon_append(d, h, modal_url_pfx, svg_id, hover_color, section_content, 
   return section_content;
 }
 
+
+
 // main function to link table elements to modal popups. 
 // The only argument taken is 'csvLink' which is a link to a csv file with the following columns:
 // EPU, indicator_name, indicator_chunk_title, image_url, caption, alt_text, data_link, time_min, time_max, methods_link
-function link_table(csvLink) {
-  // load in csv file 
-  d3.csv(csvLink).then(function(dataSet) {
-
-    // get rid of keys in array of dataSet (the javascript library DataTable that generates the html table doesn't do well with keyed arrays)
-    dataSet1 = dataSet.map(function(d) {
-      var arr = [];
-      for (key in d) {
-        arr.push(d[key]);
-      }
-      return arr;
-    })
-
-    // Pass the loaded data to DataTable. Note that most of the columns are invisible - they are used to generate the modal content only
-      $(document).ready(function() {
-        var table = $('#example').DataTable( {
-              data: dataSet1,
-              columnDefs: [
-                {targets: [2, 3, 4, 5, 6, 9],
-                visible: false,
-                searchable: false}],
-              columns: [
-                { title: 'Ecological Production Unit' },
-                { title: 'Indicator name' },
-                { title: 'indicator_chunk_title' },
-                { title: 'image_url' },
-                { title: 'caption' },
-                { title: 'alt_text' },   
-                { title: 'data_link' },                           
-                { title: 'Year Beginning' },
-                { title: 'Year End' },
-                { title: 'methods_link' }
-              ]
-          } );
-
-      // When someone clicks on a row, generate the relevant modal window based upon the data mostly in the hidden cells of that row.
-        $('#example tbody').on('click', 'tr', function () {
-          var data = table.row( this ).data();
-          document.getElementById('title').innerHTML = data[1];
-          document.getElementById('caption').innerHTML = data[4];
-
-          // most elements in the modal window are a 1 to 1 copy/paste from the cells in the data table
-          // the image source is different. The image link given in the table is for the github page for 
-          // an image, but we want the raw image on github. The following translates the former to the latter.
-          var img_src = data[3];
-          img_src = "https://raw.githubusercontent.com/" + img_src.split("https://github.com/")[1];
-          img_src = img_src.split("blob/")[0] + img_src.split("blob/")[1];
-
-          d3.select("#img_target").select("img").remove();
-          d3.select("#img_target").insert("img")
-            .attr("src", img_src)
-            .attr("alt_text", data[5])
-            .attr("style", "max-width:100% ; max-height: auto;");
-          d3.select("#datalink").select("a").remove();
-          d3.select("#datalink").select("i").remove();
-          d3.select("#datalink").append("i")
-            .attr("class", "fas fa-external-link-alt");     
-          d3.select("#datalink").append("a")
-            .attr("href", data[6])
-            .attr("target", "_blank")
-            .html(" Data Source.");
-          d3.select("#methodslink").select("a").remove();
-          d3.select("#methodslink").select("i").remove();
-
-          // only add a data methodology link if one is given.
-          if (data[9] != ""){
-            d3.select("#methodslink").append("i")
-              .attr("class", "fas fa-external-link-alt");  
-            d3.select("#methodslink").append("a")
-              .attr("href", data[9])
-              .attr("target", "_blank")
-              .html(" Graph Methodology.");
-          }
-          document.getElementById('modal1').style.display='block';
-        } );
-
-    } );
-  });
-  // Get the modal
-  var modal = document.getElementById('modal1');
-
-  // When the user clicks anywhere outside of the modal, close it
-  window.onclick = function(event) {
-      if (event.target == modal) {
-          modal.style.display = "none";
-      }
+function link_table(csvLink){
+  function generateModalContent(data){
+    document.getElementById('title').innerHTML = data[1];
+    document.getElementById('caption').innerHTML = data[4];
+    const img_src = data[3].replace("https://github.com/", "https://raw.githubusercontent.com/").replace("blob/", "");
+    const img_target = d3.select('#img_target');
+    img_target.select('img').remove();
+    img_target.insert('img').attr('src', img_src).attr('alt_text', data[5]).attr('style', 'width:100% ; max-height: auto');
+    updateLink('datalink', data[6]);
+    updateLink('methodslink', data[9]);
   }
+
+  function updateLink(id, link){
+    const link_container = d3.select(`#${id}`)
+    link_container.select('a').remove();
+    link_container.select('i').remove();
+    if (link !== ""){
+      link_container.append('i').attr('class', 'fas fa-external-link-alt');
+
+      link_container.append(a).attr('href', link).attr('target', '_blank').html(`${elementId === "datalink" ? " Data Source" : " Graph Methodology"}.`);
+    }
+  }
+
+  d3.csv(csvLink).then(dataSet => {
+    const dataSet1 = dataSet.map(d => Object.values(d));
+
+    $(document).ready(function() {
+      var table = $('#example').DataTable( {
+            data: dataSet1,
+            columnDefs: [
+              {targets: [2, 3, 4, 5, 6, 9],
+              visible: false,
+              searchable: false}],
+            columns: [
+              { title: 'Ecological Production Unit' },
+              { title: 'Indicator name' },
+              { title: 'indicator_chunk_title' },
+              { title: 'image_url' },
+              { title: 'caption' },
+              { title: 'alt_text' },   
+              { title: 'data_link' },                           
+              { title: 'Year Beginning' },
+              { title: 'Year End' },
+              { title: 'methods_link' }
+            ]
+        });
+      $('#example tbody').on('click', 'tr', function () {
+        const data = table.row( this ).data();
+        generateModalContent(data);
+        document.getElementById('modal1').style.display = 'block';
+      });
+    });
+  });
+
+  const modal = document.getElementById('modal1');
+  window.onclick = function (event) {
+    if (event.target == modal) {
+      modal.style.display = 'none';
+    }
+  };
 }
